@@ -118,7 +118,13 @@ qtpositioning5-dev qtlocation5-dev libqt5texttospeech5-dev libqwt-qt5-dev
 
 ## Fresh Install
 
-- Login as a user with sudo privelges
+- Login as a user with sudo privileges
+- Install tools you will need to build and compile applications
+
+```
+sudo apt-get install -y build-essential git
+```
+
 - Create a directory in your home called source and switch into it
 
 ```
@@ -127,19 +133,19 @@ mkdir ~/source && cd ~/source
 - Clone the Repo
 
 ```
-git clone https://github.com/joecupano/SIGbox.git
+git clone https://github.com/joecupano/SIGdeb.git
 ```
 
 - Change directory into SIGbox
 
 ```
-cd SIGbox
+cd SIGdeb
 ```
 
-- Run SIGpi_installer.sh
+- Run SIGdeb_installer.sh
 
 ```
-./SIGpi_installer.sh
+./SIGdeb_installer.sh
 ```
 
 Follow script instructions.

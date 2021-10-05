@@ -33,7 +33,7 @@ GNURADIO_PKG="gnuradio_3.9"
 SIGDEB_SOURCE=$HOME/source
 
 # SIGdeb Home directory
-SIGDEB_HOME=$SIGDEB_SOURCE/SIGbox
+SIGDEB_HOME=$SIGDEB_SOURCE/SIGdeb
 
 # SDRangel Source directory
 SIGDEB_SDRANGEL=$SIGDEB_SOURCE/SDRangel
@@ -255,17 +255,35 @@ install_dependencies(){
 	sudo mkswap /swapfile
 	sudo swapon /swapfile
 
-    sudo apt-get install -y git cmake g++ pkg-config autoconf automake libtool build-essential \
-	pulseaudio bison flex gettext ffmpeg portaudio19-dev doxygen graphviz gnuplot gnuplot-x11 swig
+    sudo apt-get install -y git cmake g++ pkg-config autoconf automake libtool build-essential pulseaudio bison flex gettext ffmpeg \
+	portaudio19-dev doxygen graphviz gnuplot gnuplot-x11 swig  icu-doc libjs-jquery-ui-docs tcl8.6 tk8.6 libvolk2-doc python-cycler-doc inkscape \
+	tk8.6-blt2.5 ttf-bitstream-vera uhd-host dvipng texlive-latex-extra ttf-staypuft tix
 
-	sudo apt-get install -y libfaad-dev zlib1g-dev libboost-all-dev libasound2-dev libfftw3-dev libusb-1.0-0 libusb-1.0-0-dev libusb-dev \
+	sudo apt-get install -y libboost-all-dev libboost1.71-dev libboost1.71-tools-dev libboost1.71-doc libboost-container1.71-dev libboost-context1.71-dev \
+	libboost-contract1.71-dev libboost-coroutine1.71-dev libboost-exception1.71-dev libboost-fiber1.71-dev libboost-graph1.71-dev libboost-graph-parallel1.71-dev \
+	libboost-iostreams1.71-dev libboost-locale1.71-dev libboost-log1.71-dev libboost-math1.71-dev libboost-mpi1.71-dev libboost-mpi-python1.71-dev \
+	libboost-numpy1.71-dev libboost-python1.71-dev libboost-random1.71-dev libboost-stacktrace1.71-dev libboost-timer1.71-dev libboost-type-erasure1.71-dev \
+    libboost-wave1.71-dev libboost-atomic1.71-dev libboost-atomic1.71.0 libboost-chrono1.71-dev libboost-chrono1.71.0 libboost-date-time-dev \
+	libboost-date-time1.71-dev libboost-filesystem-dev libboost-filesystem1.71-dev libboost-program-options-dev libboost-program-options1.71-dev \
+	libboost-program-options1.71.0 libboost-regex-dev libboost-regex1.71-dev libboost-regex1.71.0 libboost-serialization1.71-dev libboost-serialization1.71.0 \
+	libboost-system-dev libboost-system1.71-dev libboost-system1.71.0 libboost-test-dev libboost-test1.71-dev libboost-test1.71.0 \
+	libboost-thread-dev libboost-thread1.71-dev libcanberra-gtk-module libcanberra-gtk0 libcppunit-1.15-0 libcppunit-dev libfftw3-bin \
+	libfftw3-dev libfftw3-long3 libfftw3-quad3 libfreesrp0 libglfw3 libgmp-dev libgmpxx4ldbl libhidapi-libusb0 libicu-dev libjs-jquery-ui \
+	liblimesuite20.01-1 liblog4cpp5-dev liblog4cpp5v5 libmirisdr0 libtk8.6 
+
+  
+	sudo apt-get install -y libvolk2-bin libvolk2-dev libvolk2.2 libfaad-dev zlib1g-dev libasound2-dev libfftw3-dev libusb-1.0-0 libusb-1.0-0-dev libusb-dev \
 	libopencv-dev libxml2-dev libaio-dev libnova-dev libwxgtk-media3.0-dev libcairo2-dev libavcodec-dev libpthread-stubs0-dev \
 	libavformat-dev libfltk1.3-dev libfltk1.3 libsndfile1-dev libopus-dev libavahi-common-dev libavahi-client-dev libavdevice-dev libavutil-dev \
 	libsdl1.2-dev libgsl-dev liblog4cpp5-dev libzmq3-dev libudev-dev liborc-0.4-0 liborc-0.4-dev libsamplerate0-dev libgmp-dev \
-	libpcap-dev libcppunit-dev libbluetooth-dev python-pyside python-qt4 qt5-default libpulse-dev libliquid-dev libswscale-dev libswresample-dev 
+	libpcap-dev libcppunit-dev libbluetooth-dev qt5-default libpulse-dev libliquid-dev libswscale-dev libswresample-dev \
+	libfftw3-doc libgles1 libosmesa6 gmp-doc libgmp10-doc libmpfr-dev libmpfrc++-dev libntl-dev libcppunit-doc 
 
 	sudo apt-get install -y python3-pip python3-numpy python3-mako python3-sphinx python3-lxml python3-yaml python3-click python3-click-plugins \
-	python3-zmq python3-scipy python3-scapy python3-setuptools python3-pyqt5 python3-gi-cairo python-docutils
+	python3-zmq python3-scipy python3-scapy python3-setuptools python3-pyqt5 python3-gi-cairo python-docutils python3-gobject python3-nose \
+	python3-tornado texlive-extra-utils python-networkx-doc python3-gdal python3-pygraphviz | python3-pydot libgle3 python-pyqtgraph-doc \
+	python-matplotlib-doc python3-cairocffi python3-tk-dbg python-matplotlib-data python3-cycler python3-kiwisolver python3-matplotlib python3-networkx \
+	python3-opengl python3-pyqt5.qtopengl python3-pyqtgraph python3-tk python-pyside python-qt4 python3-qwt-qt5
 
 	sudo apt-get install -y qtchooser libqt5multimedia5-plugins qtmultimedia5-dev libqt5websockets5-dev qttools5-dev qttools5-dev-tools \
 	libqt5opengl5-dev qtbase5-dev libqt5quick5 libqt5charts5-dev qml-module-qtlocation  qml-module-qtpositioning qml-module-qtquick-window2 \
@@ -274,6 +292,7 @@ install_dependencies(){
 
 	sudo python3 -m pip install --upgrade pip
 	sudo pip3 install pygccxml
+
 }
 
 install_libraries(){

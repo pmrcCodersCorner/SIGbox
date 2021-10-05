@@ -106,19 +106,6 @@ select_sdrdevices() {
     echo $FUN >> $SIG_CONFIG
 }
 
-select_gnuradio() {
-    FUN=$(whiptail --title "GNUradio" --radiolist --separate-output \
-        "Choose GNUradio version" 20 80 12 \
-        "gnuradio-3.7" "Installed from distro (Raspberry Pi OS) " ON \
-        "gnuradio-3.8" "Compiled from Repo (required for gr-gsm) " OFF \
-        3>&1 1>&2 2>&3)
-    RET=$?
-    if [ $RET -eq 1 ]; then
-        $FUN = "NONE"
-    fi
-    echo $FUN >> $SIG_CONFIG
-}
-
 select_decoders() {
     FUN=$(whiptail --title "Digital Decoders" --checklist --separate-output \
         "Choose Decoders " 20 120 12\
@@ -138,7 +125,6 @@ select_decoders() {
 select_sdrapps() {
     FUN=$(whiptail --title "SDR Applications" --checklist --separate-output \
         "Choose SDR Applications" 20 80 12 \
-        "gqrx" "SDR Receiver " ON \
         "cubicsdr" "SDR Receiver " OFF \
         "sdrangel" "SDRangel " OFF \
         3>&1 1>&2 2>&3)
@@ -221,7 +207,6 @@ select_utilities() {
         "gpsPS" "GPS client and NTP sync " OFF \
         "gpredict" "Satellite Tracking " OFF \
         "splat" "RF Signal Propagation, Loss, And Terrain analysis tool for 20 MHz to 20 GHz " OFF \
-        "tempest" "Uses your computer monitor to send out AM radio signals" OFF \
         3>&1 1>&2 2>&3)
     RET=$?
     if [ $RET -eq 1 ]; then
@@ -258,26 +243,25 @@ install_dependencies(){
     sudo apt-get install -y git cmake g++ pkg-config autoconf automake libtool build-essential pulseaudio bison flex gettext ffmpeg \
 	portaudio19-dev doxygen graphviz gnuplot gnuplot-x11 swig  icu-doc libjs-jquery-ui-docs tcl8.6 tk8.6 libvolk2-doc python-cycler-doc inkscape \
 	tk8.6-blt2.5 ttf-bitstream-vera uhd-host dvipng texlive-latex-extra ttf-staypuft tix openssl
+	
+	sudo apt-get install -y libusb-1.0 libusb-1.0-0 libusb-1.0-0-dev libusb-dev
+	sudo apt-get install -y libaio-dev libusb-1.0-0-dev libserialport-dev libxml2-dev libavahi-client-dev doxygen graphviz
+	sudo apt-get install -y libfltk1.3 libfltk1.3-dev libudev-dev
+	sudo apt-get install -y libopenjp2-7 libopenjp2-7-dev libv4l-dev
+	sudo apt-get install libsdl1.2-dev
 
-	sudo apt-get install -y libboost-all-dev libboost1.71-dev libboost1.71-tools-dev libboost1.71-doc libboost-container1.71-dev libboost-context1.71-dev \
-	libboost-contract1.71-dev libboost-coroutine1.71-dev libboost-exception1.71-dev libboost-fiber1.71-dev libboost-graph1.71-dev libboost-graph-parallel1.71-dev \
-	libboost-iostreams1.71-dev libboost-locale1.71-dev libboost-log1.71-dev libboost-math1.71-dev libboost-mpi1.71-dev libboost-mpi-python1.71-dev \
-	libboost-numpy1.71-dev libboost-python1.71-dev libboost-random1.71-dev libboost-stacktrace1.71-dev libboost-timer1.71-dev libboost-type-erasure1.71-dev \
-    libboost-wave1.71-dev libboost-atomic1.71-dev libboost-atomic1.71.0 libboost-chrono1.71-dev libboost-chrono1.71.0 libboost-date-time-dev \
-	libboost-date-time1.71-dev libboost-filesystem-dev libboost-filesystem1.71-dev libboost-program-options-dev libboost-program-options1.71-dev \
-	libboost-program-options1.71.0 libboost-regex-dev libboost-regex1.71-dev libboost-regex1.71.0 libboost-serialization1.71-dev libboost-serialization1.71.0 \
-	libboost-system-dev libboost-system1.71-dev libboost-system1.71.0 libboost-test-dev libboost-test1.71-dev libboost-test1.71.0 \
-	libboost-thread-dev libboost-thread1.71-dev libcanberra-gtk-module libcanberra-gtk0 libcppunit-1.15-0 libcppunit-dev libfftw3-bin \
-	libfftw3-dev libfftw3-long3 libfftw3-quad3 libfreesrp0 libglfw3 libgmp-dev libgmpxx4ldbl libhidapi-libusb0 libicu-dev libjs-jquery-ui \
-	liblimesuite20.01-1 liblog4cpp5-dev liblog4cpp5v5 libmirisdr0 libtk8.6 libfaad libfaad-dev
 
-  
-	sudo apt-get install -y libvolk2-bin libvolk2-dev libvolk2.2 libfaad-dev zlib1g-dev libasound2-dev libfftw3-dev libusb-1.0 libusb-1.0-0 libusb-1.0-0-dev libusb-dev \
+
+	sudo apt-get install -y libvolk2-bin libvolk2-dev libvolk2.2 libfaad-dev zlib1g-dev libasound2-dev libfftw3-dev \
 	libopencv-dev libxml2-dev libaio-dev libnova-dev libwxgtk-media3.0-dev libcairo2-dev libavcodec-dev libpthread-stubs0-dev \
 	libavformat-dev libfltk1.3-dev libfltk1.3 libsndfile1-dev libopus-dev libavahi-common-dev libavahi-client-dev libavdevice-dev libavutil-dev \
-	libsdl1.2-dev libgsl-dev liblog4cpp5-dev libzmq3-dev libudev-dev liborc-0.4 liborc-0.4-0 liborc-0.4-dev libsamplerate0-dev libgmp-dev \
+	libsdl1.2-dev libgsl-dev liblog4cpp5-dev libzmq3-dev liborc-0.4 liborc-0.4-0 liborc-0.4-dev libsamplerate0-dev libgmp-dev \
 	libpcap-dev libcppunit-dev libbluetooth-dev qt5-default libpulse-dev libliquid-dev libswscale-dev libswresample-dev \
 	libfftw3-doc libgles1 libosmesa6 gmp-doc libgmp10-doc libmpfr-dev libmpfrc++-dev libntl-dev libcppunit-doc zlib-devel libpng-devel
+	
+	sudo apt-get install -y libcanberra-gtk-module libcanberra-gtk0 libcppunit-1.15-0 libcppunit-dev libfftw3-bin \
+	libfftw3-dev libfftw3-long3 libfftw3-quad3 libfreesrp0 libglfw3 libgmp-dev libgmpxx4ldbl libhidapi-libusb0 libicu-dev libjs-jquery-ui \
+	liblimesuite20.01-1 liblog4cpp5-dev liblog4cpp5v5 libmirisdr0 libtk8.6 libfaad libfaad-dev
 
 	sudo apt-get install -y python3-pip python3-numpy python3-mako python3-sphinx python3-lxml python3-yaml python3-click python3-click-plugins \
 	python3-zmq python3-scipy python3-scapy python3-setuptools python3-pyqt5 python3-gi-cairo python-docutils python3-gobject python3-nose \
@@ -415,28 +399,6 @@ install_libraries(){
 	sudo ldconfig
 }
 
-install_gnuradio38(){
-	cd $SIGDEB_SOURCE
-	echo -e "${SIG_BANNER_COLOR}"
-	echo -e "${SIG_BANNER_COLOR} #SIGDEB#"
-	echo -e "${SIG_BANNER_COLOR} #SIGDEB#   Install GNUradio 3.8    (ETA: +60 Minutes)"
-	echo -e "${SIG_BANNER_COLOR} #SIGDEB#"
-	echo -e "${SIG_BANNER_RESET}"
-	git clone https://github.com/gnuradio/gnuradio.git
-	cd gnuradio
-	git checkout maint-3.8
-	git submodule update --init --recursive
-	mkdir build && cd build
-	cmake -DCMAKE_BUILD_TYPE=Release -DPYTHON_EXECUTABLE=/usr/bin/python3 ../
-	make -j4
-	sudo make install
-	sudo ldconfig
-	cd ~
-	echo "export PYTHONPATH=/usr/local/lib/python3/dist-packages:/usr/local/lib/python3.6/dist-packages:$PYTHONPATH" >> .profile
-	echo "export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH" >> .profile
-}
-
-
 install_sdrangel(){
 	echo -e "${SIG_BANNER_COLOR}"
 	echo -e "${SIG_BANNER_COLOR} #SIGDEB#"
@@ -445,9 +407,9 @@ install_sdrangel(){
 	echo -e "${SIG_BANNER_RESET}"
 	cd $SIGDEB_SOURCE
     sudo mkdir -p /opt/build
-	sudo chown pi:users /opt/build
+	sudo chown $USER:users /opt/build
 	sudo mkdir -p /opt/install
-	sudo chown pi:users /opt/install
+	sudo chown $USER:users /opt/install
 
 	# APT
 	# Aptdec is a FOSS program that decodes images transmitted by NOAA weather satellites.
@@ -705,14 +667,14 @@ install_fldigi(){
 install_wsjtx(){
 	echo -e "${SIG_BANNER_COLOR}"
 	echo -e "${SIG_BANNER_COLOR} #SIGDEB#"
-	echo -e "${SIG_BANNER_COLOR} #SIGDEB#   Install WSJT-Xt"
+	echo -e "${SIG_BANNER_COLOR} #SIGDEB#   Install WSJT-X"
 	echo -e "${SIG_BANNER_COLOR} #SIGDEB#"
 	echo -e "${SIG_BANNER_RESET}"
-    wget https://physics.princeton.edu/pulsar/K1JT/wsjtx_2.4.0_armhf.deb -P $HOME/Downloads
-	sudo dpkg -i $HOME/Downloads/wsjtx_2.4.0_armhf.deb
+    https://www.physics.princeton.edu/pulsar/k1jt/wsjtx_2.5.0_amd64.deb -P $HOME/Downloads
+	sudo dpkg -i $HOME/Downloads/wsjtx_2.5.0_amd64.deb
 	# Will get error next command fixes error and downloads dependencies
 	sudo apt-get --fix-broken install
-	sudo dpkg -i $HOME/Downloads/wsjtx_2.4.0_armhf.deb
+	sudo dpkg -i $HOME/Downloads/wsjtx_2.5.0_amd64.deb
 }
 
 install_qsstv(){
@@ -729,21 +691,6 @@ install_qsstv(){
 	qmake
 	make
 	sudo make install
-}
-
-install_tempest-eliza(){
-	echo -e "${SIG_BANNER_COLOR}"
-	echo -e "${SIG_BANNER_COLOR} #SIGDEB#"
-	echo -e "${SIG_BANNER_COLOR} #SIGDEB#   Install TEMPEST for Eliza"
-	echo -e "${SIG_BANNER_COLOR} #SIGDEB#"
-	echo -e "${SIG_BANNER_RESET}"
-	wget http://www.erikyyy.de/tempest/tempest_for_eliza-1.0.5.tar.gz -P $HOME/Downloads
-	tar -zxvf $HOME/Downloads/tempest_for_eliza-1.0.5.tar.gz -C $SIGDEB_SOURCE
-	cd $SIGDEB_SOURCE/tempest_for_eliza-1.0.5
-	./configure
-	make
-	sudo make install
-	sudo ldconfig
 }
 
 install_sigdebmenu(){
@@ -919,7 +866,7 @@ then
 	git clone https://github.com/myriadrf/LimeSuite.git
 	cd LimeSuite
 	git checkout stable
-	mkdir builddir && cd builddir
+	mkdir build && cd build
 	cmake ../
 	make -j4
 	sudo make install
@@ -997,13 +944,7 @@ fi
 ## INSTALL GNURADIO
 ##
 
-# GNUradio
-if grep gnuradio-3.8 "$SIG_CONFIG"
-then
-	install_gnuradio38
-else
-	sudo apt-get install -y gnuradio gnuradio-dev
-fi
+sudo apt-get install -y gnuradio gnuradio-dev
 
 ##
 ## INSTALL DECODERS
@@ -1039,6 +980,7 @@ then
 	qmake ../multimon-ng.pro
 	make
 	sudo make install
+	sudo ldconfig
 fi
 
 # Ubertooth Tools
@@ -1051,6 +993,7 @@ then
 	cmake ..
 	make -j4
 	sudo make install
+	sudo ldconfig
 fi
 
 
@@ -1074,15 +1017,17 @@ then
 	cmake ..
 	make
 	sudo make install
+	sudo ldconfig
+
 fi
 
-# gqrx
-if grep gqrx "$SIG_CONFIG"
-then
-    sudo apt-get install -y gqrx-sdr
-fi
+# gqrx --- Does a very dirty install of libraries lime,hamlib, gnuradfio, etc
+#if grep gqrx "$SIG_CONFIG"
+#then
+#    sudo apt-get install -y gqrx-sdr
+#fi
 
-# CubicSDR
+# CubicSDR -- install soapysdr-module-all 
 if grep cubicsdr "$SIG_CONFIG"
 then
     sudo apt-get install -y cubicsdr
@@ -1229,18 +1174,6 @@ fi
 if grep mumble "$SIG_CONFIG"
 then
     sudo apt-get install -y mumble-server mumble
-fi
-
-# Tempest for Eliza
-if grep tempest "$SIG_CONFIG"
-then
-    wget http://www.erikyyy.de/tempest/tempest_for_eliza-1.0.5.tar.gz -P $HOME/Downloads
-	tar -zxvf $HOME/Downloads/tempest_for_eliza-1.0.5.tar.gz -C $SIGDEB_SOURCE
-	cd $SIGDEB_SOURCE/tempest_for_eliza-1.0.5
-	./configure
-	make
-	sudo make install
-	sudo ldconfig
 fi
 
 install_sigdebmenu

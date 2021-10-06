@@ -262,9 +262,9 @@ install_dependencies(){
 	sudo apt-get install -y liblimesuite20.01-1 liblog4cpp5-dev liblog4cpp5v5 libmirisdr0 libtk8.6 libfaad libfaad-dev
 
 	sudo apt-get install -y python3-pip python3-numpy python3-mako python3-sphinx python3-lxml python3-yaml python3-click python3-click-plugins 
-	sudo apt-get install -y python3-zmq python3-scipy python3-scapy python3-setuptools python3-pyqt5 python3-gi-cairo python-docutils python3-gobject python3-nose
+	sudo apt-get install -y python3-zmq python3-scipy python3-scapy python3-setuptools python3-pyqt5 python3-gi-cairo python-docutils python-gobject python3-nose
 
-	sudo apt-get install -y python3-tornado texlive-extra-utils python-networkx-doc python3-gdal python3-pygraphviz | python3-pydot libgle3 python-pyqtgraph-doc 
+	sudo apt-get install -y python3-tornado texlive-extra-utils python-networkx-doc python3-gdal python3-pygraphviz python3-pydot libgle3 python-pyqtgraph-doc 
 	sudo apt-get install -y python-matplotlib-doc python3-cairocffi python3-tk-dbg python-matplotlib-data python3-cycler python3-kiwisolver python3-matplotlib python3-networkx 
 	sudo apt-get install -y python3-opengl python3-pyqt5.qtopengl python3-pyqtgraph python3-tk python-pyside python-qt4 python3-qwt-qt5
 
@@ -611,6 +611,33 @@ install_sdrangel(){
 	
 }
 
+install_sdrangel_sigdeb {
+
+    cd $SIGDEB_SDRANGEL
+	git clone https://github.com/f4exb/sdrangel.git
+	cd sdrangel
+	mkdir build; cd build
+	cmake -Wno-dev -DDEBUG_OUTPUT=ON -DRX_SAMPLE_24BIT=ON \
+	make -j4
+	sudo make install
+	sudo ldconfig
+	# Copy special startup script for this snowflake
+	#sudo cp $SIGDEB_HOME/snowflakes/SIGdeb_sdrangel.sh /usr/local/bin
+
+    cd $HOME/.config
+	mkdir f4exb
+	cd f4exb
+	# Generate a new wisdom file for FFT sizes : 128, 256, 512, 1024, 2048, 4096, 8192, 16384 and 32768.
+	# This will take a very long time.
+	fftwf-wisdom -n -o fftw-wisdom 128 256 512 1024 2048 4096 8192 16384 32768
+
+    # Add VOX for Transimtting with SDRangel
+	cd $SIGDEB_SOURCE
+	git clone https://gitlab.wibisono.or.id/published/voxangel.git
+	
+}
+
+
 install_kismet(){
 	echo -e "${SIG_BANNER_COLOR}"
 	echo -e "${SIG_BANNER_COLOR} #SIGDEB#"
@@ -759,7 +786,9 @@ echo -e "${SIG_BANNER_RESET}"
 
 sudo apt-get -y update
 sudo apt-get -y upgrade
+TERM=ansi whiptail --title "SIGdeb Installer" --msgbox "Install Dependencies" 12 120
 install_dependencies
+TERM=ansi whiptail --title "SIGdeb Installer" --msgbox "Install Libraries" 12 120
 install_libraries
 
 ##
@@ -991,7 +1020,7 @@ fi
 # SDRangel
 if grep sdrangel "$SIG_CONFIG"
 then
-    install_sdrangel
+    install_sdrangel_deb
 fi
 
 ##

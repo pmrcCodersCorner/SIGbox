@@ -240,9 +240,9 @@ install_dependencies(){
 	sudo mkswap /swapfile
 	sudo swapon /swapfile
 
-    sudo apt-get install -y git cmake g++ pkg-config autoconf automake libtool build-essential pulseaudio bison flex gettext ffmpeg \
-	portaudio19-dev doxygen graphviz gnuplot gnuplot-x11 swig  icu-doc libjs-jquery-ui-docs tcl8.6 tk8.6 libvolk2-doc python-cycler-doc inkscape \
-	tk8.6-blt2.5 ttf-bitstream-vera uhd-host dvipng texlive-latex-extra ttf-staypuft tix openssl
+    sudo apt-get install -y git cmake g++ pkg-config autoconf automake libtool build-essential pulseaudio bison flex gettext ffmpeg
+	sudo apt-get install -y portaudio19-dev doxygen graphviz gnuplot gnuplot-x11 swig  icu-doc libjs-jquery-ui-docs tcl8.6 tk8.6 libvolk2-doc python-cycler-doc inkscape
+	sudo apt-get install -y tk8.6-blt2.5 ttf-bitstream-vera uhd-host dvipng texlive-latex-extra ttf-staypuft tix openssl
 	
 	sudo apt-get install -y libusb-1.0 libusb-1.0-0 libusb-1.0-0-dev libusb-dev
 	sudo apt-get install -y libaio-dev libusb-1.0-0-dev libserialport-dev libxml2-dev libavahi-client-dev doxygen graphviz
@@ -257,22 +257,22 @@ install_dependencies(){
 	sudo apt-get install -y libpcap-dev libcppunit-dev libbluetooth-dev qt5-default libpulse-dev libliquid-dev libswscale-dev libswresample-dev
 	sudo apt-get install -y libfftw3-doc libgles1 libosmesa6 gmp-doc libgmp10-doc libmpfr-dev libmpfrc++-dev libntl-dev libcppunit-doc zlib-devel libpng-devel
 	
-	sudo apt-get install -y libcanberra-gtk-module libcanberra-gtk0 libcppunit-1.15-0 libcppunit-dev libfftw3-bin \
-	libfftw3-dev libfftw3-long3 libfftw3-quad3 libfreesrp0 libglfw3 libgmp-dev libgmpxx4ldbl libhidapi-libusb0 libicu-dev libjs-jquery-ui \
-	liblimesuite20.01-1 liblog4cpp5-dev liblog4cpp5v5 libmirisdr0 libtk8.6 libfaad libfaad-dev
+	sudo apt-get install -y libcanberra-gtk-module libcanberra-gtk0 libcppunit-1.15-0 libcppunit-dev libfftw3-bin 
+	sudo apt-get install -y libfftw3-dev libfftw3-long3 libfftw3-quad3 libfreesrp0 libglfw3 libgmp-dev libgmpxx4ldbl libhidapi-libusb0 libicu-dev libjs-jquery-ui 
+	sudo apt-get install -y liblimesuite20.01-1 liblog4cpp5-dev liblog4cpp5v5 libmirisdr0 libtk8.6 libfaad libfaad-dev
 
-	sudo apt-get install -y python3-pip python3-numpy python3-mako python3-sphinx python3-lxml python3-yaml python3-click python3-click-plugins \
-	python3-zmq python3-scipy python3-scapy python3-setuptools python3-pyqt5 python3-gi-cairo python-docutils python3-gobject python3-nose
+	sudo apt-get install -y python3-pip python3-numpy python3-mako python3-sphinx python3-lxml python3-yaml python3-click python3-click-plugins 
+	sudo apt-get install -y python3-zmq python3-scipy python3-scapy python3-setuptools python3-pyqt5 python3-gi-cairo python-docutils python3-gobject python3-nose
 
-	sudo apt-get install -y python3-tornado texlive-extra-utils python-networkx-doc python3-gdal python3-pygraphviz | python3-pydot libgle3 python-pyqtgraph-doc \
-	python-matplotlib-doc python3-cairocffi python3-tk-dbg python-matplotlib-data python3-cycler python3-kiwisolver python3-matplotlib python3-networkx \
-	python3-opengl python3-pyqt5.qtopengl python3-pyqtgraph python3-tk python-pyside python-qt4 python3-qwt-qt5
+	sudo apt-get install -y python3-tornado texlive-extra-utils python-networkx-doc python3-gdal python3-pygraphviz | python3-pydot libgle3 python-pyqtgraph-doc 
+	sudo apt-get install -y python-matplotlib-doc python3-cairocffi python3-tk-dbg python-matplotlib-data python3-cycler python3-kiwisolver python3-matplotlib python3-networkx 
+	sudo apt-get install -y python3-opengl python3-pyqt5.qtopengl python3-pyqtgraph python3-tk python-pyside python-qt4 python3-qwt-qt5
 
-	sudo apt-get install -y qtchooser libqt5multimedia5-plugins qtmultimedia5-dev libqt5websockets5-dev qttools5-dev qttools5-dev-tools \
-	libqt5opengl5-dev qtbase5-dev libqt5quick5 libqt5charts5-dev qml-module-qtlocation  qml-module-qtpositioning qml-module-qtquick-window2
+	sudo apt-get install -y qtchooser libqt5multimedia5-plugins qtmultimedia5-dev libqt5websockets5-dev qttools5-dev qttools5-dev-tools 
+	sudo apt-get install -y libqt5opengl5-dev qtbase5-dev libqt5quick5 libqt5charts5-dev qml-module-qtlocation  qml-module-qtpositioning qml-module-qtquick-window2
 	
-	sudo apt-get install -y qml-module-qtquick-dialogs qml-module-qtquick-controls qml-module-qtquick-controls2 qml-module-qtquick-layouts libqt5serialport5-dev \
-	qtdeclarative5-dev qtpositioning5-dev qtlocation5-dev libqt5texttospeech5-dev libqwt-qt5-dev
+	sudo apt-get install -y qml-module-qtquick-dialogs qml-module-qtquick-controls qml-module-qtquick-controls2 qml-module-qtquick-layouts libqt5serialport5-dev 
+	sudo apt-get install -y qtdeclarative5-dev qtpositioning5-dev qtlocation5-dev libqt5texttospeech5-dev libqwt-qt5-dev
 
 	sudo python3 -m pip install --upgrade pip
 	sudo pip3 install pygccxml
@@ -721,58 +721,9 @@ install_sigdebmenu(){
 	# Add SIGdeb Category for each installed application
 	#
 
-	sudo sed -i "s/Categories.*/Categories=$SIGDEB_MENU_CATEGORY;/" $DESKTOP_FILES/lime-suite.desktop
-	sudo sed -i "s/Categories.*/Categories=$SIGDEB_MENU_CATEGORY;/" $DESKTOP_FILES/gnuradio-grc.desktop
-	sudo sed -i "s/Categories.*/Categories=$SIGDEB_MENU_CATEGORY;/" $DESKTOP_FILES/gqrx.desktop
-	sudo sed -i "s/Categories.*/Categories=$SIGDEB_MENU_CATEGORY;/" $DESKTOP_FILES/CubicSDR.desktop
-	sudo sed -i "s/Categories.*/Categories=$SIGDEB_MENU_CATEGORY;/" $DESKTOP_FILES/sdrangel.desktop
-	sudo sed -i "s/Categories.*/Categories=$SIGDEB_MENU_CATEGORY;/" $DESKTOP_FILES/direwolf.desktop
-	sudo sed -i "s/Categories.*/Categories=$SIGDEB_MENU_CATEGORY;/" $DESKTOP_FILES/linpac.desktop
-	sudo sed -i "s/Categories.*/Categories=$SIGDEB_MENU_CATEGORY;/" $DESKTOP_FILES/xastir.desktop
-	sudo sed -i "s/Categories.*/Categories=$SIGDEB_MENU_CATEGORY;/" $DESKTOP_FILES/flarq.desktop
-	sudo sed -i "s/Categories.*/Categories=$SIGDEB_MENU_CATEGORY;/" $DESKTOP_FILES/fldigi.desktop
-	sudo sed -i "s/Categories.*/Categories=$SIGDEB_MENU_CATEGORY;/" $DESKTOP_FILES/flrig.desktop
-	sudo sed -i "s/Categories.*/Categories=$SIGDEB_MENU_CATEGORY;/" $DESKTOP_FILES/wsjtx.desktop
-	sudo sed -i "s/Categories.*/Categories=$SIGDEB_MENU_CATEGORY;/" $DESKTOP_FILES/message_aggregator.desktop
-	sudo sed -i "s/Categories.*/Categories=$SIGDEB_MENU_CATEGORY;/" $DESKTOP_FILES/qsstv.desktop
-	sudo sed -i "s/Categories.*/Categories=$SIGDEB_MENU_CATEGORY;/" $DESKTOP_FILES/mumble.desktop
-	sudo sed -i "s/Categories.*/Categories=$SIGDEB_MENU_CATEGORY;/" $DESKTOP_FILES/gpredict.desktop
-	sudo sed -i "s/Categories.*/Categories=$SIGDEB_MENU_CATEGORY;/" $DESKTOP_FILES/wireshark.desktop
-	sudo sed -i "s/Categories.*/Categories=$SIGDEB_MENU_CATEGORY;/" $DESKTOP_FILES/sigidwiki.desktop
-	sudo sed -i "s/Categories.*/Categories=$SIGDEB_MENU_CATEGORY;/" $DESKTOP_FILES/sigdeb_example.desktop
-	sudo sed -i "s/Categories.*/Categories=$SIGDEB_MENU_CATEGORY;/" $DESKTOP_FILES/sigdeb_home.desktop
-	
-	#
-	# Add installed applications into SIGdeb menu
-	#
-
-	xdg-desktop-menu install --novendor --noupdate $DESKTOP_DIRECTORY/SIGdeb.directory $DESKTOP_FILES/lime-suite.desktop
-	xdg-desktop-menu install --novendor --noupdate $DESKTOP_DIRECTORY/SIGdeb.directory $DESKTOP_FILES/gnuradio-grc.desktop
-	xdg-desktop-menu install --novendor --noupdate $DESKTOP_DIRECTORY/SIGdeb.directory $DESKTOP_FILES/gqrx.desktop
-	xdg-desktop-menu install --novendor --noupdate $DESKTOP_DIRECTORY/SIGdeb.directory $DESKTOP_FILES/CubicSDR.desktop
-	xdg-desktop-menu install --novendor --noupdate $DESKTOP_DIRECTORY/SIGdeb.directory $DESKTOP_FILES/sdrangel.desktop
-	xdg-desktop-menu install --novendor --noupdate $DESKTOP_DIRECTORY/SIGdeb.directory $DESKTOP_FILES/direwolf.desktop
-	xdg-desktop-menu install --novendor --noupdate $DESKTOP_DIRECTORY/SIGdeb.directory $DESKTOP_FILES/linpac.desktop
-	xdg-desktop-menu install --novendor --noupdate $DESKTOP_DIRECTORY/SIGdeb.directory $DESKTOP_FILES/xastir.desktop
-	xdg-desktop-menu install --novendor --noupdate $DESKTOP_DIRECTORY/SIGdeb.directory $DESKTOP_FILES/flarq.desktop
-	xdg-desktop-menu install --novendor --noupdate $DESKTOP_DIRECTORY/SIGdeb.directory $DESKTOP_FILES/fldigi.desktop
-	xdg-desktop-menu install --novendor --noupdate $DESKTOP_DIRECTORY/SIGdeb.directory $DESKTOP_FILES/flrig.desktop
-	xdg-desktop-menu install --novendor --noupdate $DESKTOP_DIRECTORY/SIGdeb.directory $DESKTOP_FILES/wsjtx.desktop
-	xdg-desktop-menu install --novendor --noupdate $DESKTOP_DIRECTORY/SIGdeb.directory $DESKTOP_FILES/message_aggregator.desktop
-	xdg-desktop-menu install --novendor --noupdate $DESKTOP_DIRECTORY/SIGdeb.directory $DESKTOP_FILES/qsstv.desktop
-	xdg-desktop-menu install --novendor --noupdate $DESKTOP_DIRECTORY/SIGdeb.directory $DESKTOP_FILES/mumble.desktop
-	xdg-desktop-menu install --novendor --noupdate $DESKTOP_DIRECTORY/SIGdeb.directory $DESKTOP_FILES/gpredict.desktop
-	xdg-desktop-menu install --novendor --noupdate $DESKTOP_DIRECTORY/SIGdeb.directory $DESKTOP_FILES/wireshark.desktop
-	xdg-desktop-menu install --novendor --noupdate $DESKTOP_DIRECTORY/SIGdeb.directory $DESKTOP_FILES/sigidwiki.desktop
-	xdg-desktop-menu install --novendor --noupdate $DESKTOP_DIRECTORY/SIGdeb.directory $DESKTOP_FILES/sigdeb_example.desktop
-	xdg-desktop-menu install --novendor --noupdate $DESKTOP_DIRECTORY/SIGdeb.directory $DESKTOP_FILES/sigdeb_home.desktop
-
-	# Add Desktop links
-	sudo cp $SIGDEB_DESKTOP/sigdeb_home.desktop $HOME/Desktop/SIGdeb.desktop
-
-
-	# Remove Rogue desktop file to ensure we use the one we provided for direwolf
-	sudo rm -rf /usr/local/share/applications/direwolf.desktop
+	sudo cp $SIGDEB_DESKTOP/sigidwiki.desktop $USER/Desktop/sigidwiki.desktop
+	sudo cp $SIGDEB_DESKTOP/sigdeb_home.desktop $USER/Desktop/sigdeb_home.desktop
+	sudo cp $DESKTOP_FILES/gnuradio-grce.desktop $USER/Desktop/gnuradio-grc.desktop
 }
 
 config_stuff(){
@@ -814,6 +765,7 @@ install_libraries
 ##
 ##  INSTALL DRIVERS
 ##
+TERM=ansi whiptail --title "SIGdeb Installer" --msgbox "Install Drivers" 12 120
 
 echo -e "${SIG_BANNER_COLOR}"
 echo -e "${SIG_BANNER_COLOR} #SIGDEB#"
@@ -943,9 +895,11 @@ fi
 ##
 ## INSTALL GNURADIO
 ##
+TERM=ansi whiptail --title "SIGdeb Installer" --msgbox "Install GNUradio 3.8" 12 120
 
 sudo apt-get install -y gnuradio gnuradio-dev
 
+TERM=ansi whiptail --title "SIGdeb Installer" --msgbox "Decoders" 12 120
 ##
 ## INSTALL DECODERS
 ##
@@ -1000,6 +954,7 @@ fi
 ##
 ## INSTALL SDRAPPS
 ##
+TERM=ansi whiptail --title "SIGdeb Installer" --msgbox "Install SDRapps" 12 120
 
 echo -e "${SIG_BANNER_COLOR}"
 echo -e "${SIG_BANNER_COLOR} #SIGDEB#"
@@ -1042,6 +997,7 @@ fi
 ##
 ## INSTALL AMATEUR RADIO APPLICATIONS
 ##
+TERM=ansi whiptail --title "SIGdeb Installer" --msgbox "Install Amateur Radio Apps" 12 120
 
 echo -e "${SIG_BANNER_COLOR}"
 echo -e "${SIG_BANNER_COLOR} #SIGDEB#"
@@ -1113,8 +1069,9 @@ then
 fi
 
 ##
-## INSTALL OTHERAPPS
+## INSTALL OTHER APPS
 ##
+TERM=ansi whiptail --title "SIGdeb Installer" --msgbox "Install Other Apps" 12 120
 
 echo -e "${SIG_BANNER_COLOR}"
 echo -e "${SIG_BANNER_COLOR} #SIGDEB#"
@@ -1176,6 +1133,7 @@ then
     sudo apt-get install -y mumble-server mumble
 fi
 
+TERM=ansi whiptail --title "SIGdeb Installer" --msgbox "Install Desktop items" 12 120
 install_sigdebmenu
 
 echo -e "${SIG_BANNER_COLOR}"

@@ -610,32 +610,6 @@ install_sdrangel(){
 	
 }
 
-# sdrangel_sigdeb is Experimental. Currently not in menu selections
-install_sdrangel_sigdeb { 
-    cd $SIGDEB_SDRANGEL
-	git clone https://github.com/f4exb/sdrangel.git
-	cd sdrangel
-	mkdir build; cd build
-	cmake -Wno-dev -DDEBUG_OUTPUT=ON -DRX_SAMPLE_24BIT=ON \
-	make -j4
-	sudo make install
-	sudo ldconfig
-	# Copy special startup script for this snowflake
-	#sudo cp $SIGDEB_HOME/snowflakes/SIGdeb_sdrangel.sh /usr/local/bin
-
-    cd $HOME/.config
-	mkdir f4exb
-	cd f4exb
-	# Generate a new wisdom file for FFT sizes : 128, 256, 512, 1024, 2048, 4096, 8192, 16384 and 32768.
-	# This will take a very long time.
-	fftwf-wisdom -n -o fftw-wisdom 128 256 512 1024 2048 4096 8192 16384 32768
-
-    # Add VOX for Transimtting with SDRangel
-	cd $SIGDEB_SOURCE
-	git clone https://gitlab.wibisono.or.id/published/voxangel.git
-	
-}
-
 install_sdrplusplus(){
 	echo -e "${SIG_BANNER_COLOR}"
 	echo -e "${SIG_BANNER_COLOR} #SIGDEB#"

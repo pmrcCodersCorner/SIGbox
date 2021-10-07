@@ -241,9 +241,9 @@ install_dependencies(){
 	sudo apt-get install -y portaudio19-dev doxygen graphviz gnuplot gnuplot-x11 swig  icu-doc libjs-jquery-ui-docs tcl8.6 tk8.6 libvolk2-doc python-cycler-doc inkscape
 	sudo apt-get install -y tk8.6-blt2.5 ttf-bitstream-vera uhd-host dvipng texlive-latex-extra ttf-staypuft tix openssl
 	
-	sudo apt-get install -y libusb-1.0 libusb-1.0-0 libusb-1.0-0-dev libusb-dev
+	sudo apt-get install -y libusb-1.0 libusb-1.0-0 libusb-1.0-0-dev libusb-dev libudev1
 	sudo apt-get install -y libaio-dev libusb-1.0-0-dev libserialport-dev libxml2-dev libavahi-client-dev doxygen graphviz
-	sudo apt-get install -y libfltk1.3 libfltk1.3-dev libudev-dev
+	sudo apt-get install -y libfltk1.3 libfltk1.3-dev 
 	sudo apt-get install -y libopenjp2-7 libopenjp2-7-dev libv4l-dev
 	sudo apt-get install -y libsdl1.2-dev libfaad2
 

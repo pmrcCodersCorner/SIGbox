@@ -21,13 +21,18 @@
 ###
 
 # Package Versions
+HAMLIB_VER="hamlib-4.3"
+GNURADIO_VER="gnuradio_3.8"
+FLDIGI_VERPKG="fldigi-4.1.20"
+WSJTX_VER="wsjtx_2.4.0"
+QSSTV_VER="qsstv_9.5.8"
+
 HAMLIB_PKG="hamlib-4.3.tar.gz"
-FLXMLRPC_PKG="flxmlrpc-0.1.4.tar.gz"
-FLRIG_PKG="flrig-1.4.2.tar.gz"
+GNURADIO_PKG="gnuradio_3.8"
 FLDIGI_PKG="fldigi-4.1.20.tar.gz"
 WSJTX_PKG="wsjtx_2.4.0_armhf.deb"
 QSSTV_PKG="qsstv_9.5.8.tar.gz"
-GNURADIO_PKG="gnuradio_3.9"
+
 
 # Source Directory
 SIGDEB_SOURCE=$HOME/source
@@ -94,10 +99,10 @@ select_sdrdevices() {
         "libiio" "PlutoSDR " OFF \
         "limesuite" "LimeSDR " OFF \
         "soapysdr" "SoapySDR Library " ON \
-        "soapyremote" "Use any Soapy SDR Remotely " ON \
-        "soapyrtlsdr" "Soapy SDR Module for RTLSDR " ON \
-        "soapyhackrf" "Soapy SDR Module for HackRF One " OFF \
-        "soapyplutosdr" "Soapy SDR Module for PlutoSD " OFF \
+        "soapyremote" "Use any SoapySDR Remotely " ON \
+        "soapyrtlsdr" "SoapySDR Module for RTLSDR " ON \
+        "soapyhackrf" "SoapySDR Module for HackRF One " OFF \
+        "soapyplutosdr" "SoapySDR Module for PlutoSD " OFF \
         3>&1 1>&2 2>&3)
     RET=$?
     if [ $RET -eq 1 ]; then
@@ -109,10 +114,10 @@ select_sdrdevices() {
 select_decoders() {
     FUN=$(whiptail --title "Digital Decoders" --checklist --separate-output \
         "Choose Decoders " 20 120 12\
-        "aptdec" "Decodes images transmitted by NOAA weather satellites " ON \
-        "rtl_433" "Generic data receiver with sensor support mainly for UHF ISM Bands " ON \
-        "op25" "P25 digital voice decoder which works with RTL-SDR dongles" ON \
-        "multimon-ng" "Decoder for POCSGA, FLEX, X10, DTMF, ZVEi, UFSK, AFSK, etc" ON \
+        "aptdec" "NOAA weather satellites images" ON \
+        "rtl_433" "Various OT and IoT sensors using UHF ISM Bands " ON \
+        "op25" "P25 Digital Voice" ON \
+        "multimon-ng" "POCSAG, FLEX, X10, DTMF, ZVEi, UFSK, AFSK, etc" ON \
         "ubertooth-tools" "Bluetooth BLE and BR tools for Ubertooth device" ON \
         3>&1 1>&2 2>&3)
     RET=$?
@@ -127,6 +132,7 @@ select_sdrapps() {
         "Choose SDR Applications" 20 80 12 \
         "cubicsdr" "SDR Receiver " OFF \
         "sdrangel" "SDRangel " OFF \
+		"sdrplusplus" "SDR++ " OFF \
         3>&1 1>&2 2>&3)
     RET=$?
     if [ $RET -eq 1 ]; then
@@ -136,23 +142,12 @@ select_sdrapps() {
 }
 
 select_hamradio() {
-	FUN=$(whiptail --title "Ham Control Library" --radiolist --separate-output \
-        "USed for exterbal control of Aateur Radio and some SDR transceivers as \
-		well as antenna rotors. Choose HAMlib version" 20 80 12 \
-        "hamlib-3.3" "Installed from distro " ON \
-        "hamlib-4.3" "Compiled from Repo (~20 minutes compile time) " OFF \
-        3>&1 1>&2 2>&3)
-    RET=$?
-    if [ $RET -eq 1 ]; then
-        $FUN = "NONE"
-    fi
-    echo $FUN >> $SIG_CONFIG
-
     FUN=$(whiptail --title "Fldigi Suite" --radiolist --separate-output \
         "Used for MFSK, PSK31, CW, RTTY. WEFAX and many others \
 		Choose Fldigi version" 20 80 12 \
-        "fldigi-4.1.01" "Installed from distro " ON \
-        "fldigi-4.1.20" "Compiled from Repo (~40 minutes compile time) " OFF \
+        "fldigi-4.1.01" "Install from distro " OFF \
+        "fldigi-4.1.20" "Compile from Repo (~40 minutes compile time) " OFF \
+		"none" "Do not install" ON \
         3>&1 1>&2 2>&3)
     RET=$?
     if [ $RET -eq 1 ]; then
@@ -163,8 +158,9 @@ select_hamradio() {
 	FUN=$(whiptail --title "Weak Signal Amateur Radio" --radiolist --separate-output \
         "Used for FT8, JT4, JT9, JT65, QRA64, ISCAT, MSK144, and WSPR \
 		digital modes. Choose WSJT-X version" 20 80 12 \
-        "wsjtx-2.0" "Installed from distro " ON \
-        "wsjtx-2.4.0" "Compiled from Repo (~20 minutes compile time) " OFF \
+        "wsjtx-2.0" "Install from distro " OFF \
+        "wsjtx-2.4.0" "Compile from Repo (~20 minutes compile time) " OFF \
+		"none" "Do not install" ON \
         3>&1 1>&2 2>&3)
     RET=$?
     if [ $RET -eq 1 ]; then
@@ -174,8 +170,9 @@ select_hamradio() {
 
 	FUN=$(whiptail --title "SIGdeb Installer" --radiolist --separate-output \
         "Choose QSSTV version" 20 80 12 \
-        "qsstv-9.2.6" "Installed from distro " ON \
-        "qsstv-9.5.8" "Compiled from Repo (~20 minutes compile time) " OFF \
+        "qsstv-9.2.6" "Install from distro " OFF \
+        "qsstv-9.5.8" "Compile from Repo (~20 minutes compile time) " OFF \
+		"none" "Do not install" ON \
         3>&1 1>&2 2>&3)
     RET=$?
     if [ $RET -eq 1 ]; then
@@ -204,7 +201,7 @@ select_utilities() {
         "audacity" "Audio Editor " OFF \
         "pavu" "PulseAudio Control " OFF \
         "mumble" "VoIP Server and Client " OFF \
-        "gpsPS" "GPS client and NTP sync " OFF \
+        "gps" "GPS client and NTP sync " OFF \
         "gpredict" "Satellite Tracking " OFF \
         "splat" "RF Signal Propagation, Loss, And Terrain analysis tool for 20 MHz to 20 GHz " OFF \
         3>&1 1>&2 2>&3)
@@ -248,7 +245,7 @@ install_dependencies(){
 	sudo apt-get install -y libaio-dev libusb-1.0-0-dev libserialport-dev libxml2-dev libavahi-client-dev doxygen graphviz
 	sudo apt-get install -y libfltk1.3 libfltk1.3-dev libudev-dev
 	sudo apt-get install -y libopenjp2-7 libopenjp2-7-dev libv4l-dev
-	sudo apt-get install -y libsdl1.2-dev
+	sudo apt-get install -y libsdl1.2-dev libfaad2
 
 	sudo apt-get install -y libvolk2-bin libvolk2-dev libvolk2.2 libfaad-dev zlib1g-dev libasound2-dev libfftw3-dev
 	sudo apt-get install -y libopencv-dev libxml2-dev libaio-dev libnova-dev libwxgtk-media3.0-dev libcairo2-dev libavcodec-dev libpthread-stubs0-dev
@@ -290,13 +287,12 @@ install_libraries(){
 	# APT
 	# Aptdec is a FOSS program that decodes images transmitted by NOAA weather satellites.
     cd $SIGDEB_SOURCE
-	git clone https://github.com/srcejon/aptdec.git
-	cd aptdec
-	mkdir build; cd build
-	cmake ..
-	make -j4
-	sudo make install
-	sudo ldconfig
+	sudo apt install libsndfile-dev libpng-dev
+	git clone https://github.com/Xerbo/aptdec.git && cd aptdec
+	mkdir build && cd build
+	cmake -DCMAKE_BUILD_TYPE=Release ..
+	make
+
 
 	# CM265cc
     cd $SIGDEB_SOURCE
@@ -318,7 +314,10 @@ install_libraries(){
 	sudo make install
 	sudo ldconfig
 
-	# MBElib
+	# MBElib 1.3.0 
+	#
+	# Supports the 7200x4400 bit/s codec used in P25 Phase 1, the 7100x4400 bit/s codec used
+	# in ProVoice and the "Half Rate" 3600x2250 bit/s vocoder used in various radio systems
     cd $SIGDEB_SOURCE
 	git clone https://github.com/szechyjs/mbelib.git
 	cd mbelib
@@ -611,8 +610,8 @@ install_sdrangel(){
 	
 }
 
-install_sdrangel_sigdeb {
-
+# sdrangel_sigdeb is Experimental. Currently not in menu selections
+install_sdrangel_sigdeb { 
     cd $SIGDEB_SDRANGEL
 	git clone https://github.com/f4exb/sdrangel.git
 	cd sdrangel
@@ -637,6 +636,16 @@ install_sdrangel_sigdeb {
 	
 }
 
+install_sdrplusplus(){
+	echo -e "${SIG_BANNER_COLOR}"
+	echo -e "${SIG_BANNER_COLOR} #SIGDEB#"
+	echo -e "${SIG_BANNER_COLOR} #SIGDEB#   Install SDRplusplus"
+	echo -e "${SIG_BANNER_COLOR} #SIGDEB#"
+	echo -e "${SIG_BANNER_RESET}"
+	wget https://github.com/AlexandreRouma/SDRPlusPlus/releases/download/1.0.3/sdrpp_ubuntu_focal_amd64.deb
+	sudo apt install libfftw3-dev libglfw3-dev libglew-dev libvolk2-dev libsoapysdr-dev libairspyhf-dev libiio-dev libad9361-dev librtaudio-dev libhackrf-dev
+	sudo dpkg -i $HOME/Downloads/sdrpp_ubuntu_focal_amd64.deb
+}
 
 install_kismet(){
 	echo -e "${SIG_BANNER_COLOR}"
@@ -697,7 +706,7 @@ install_wsjtx(){
 	echo -e "${SIG_BANNER_COLOR} #SIGDEB#   Install WSJT-X"
 	echo -e "${SIG_BANNER_COLOR} #SIGDEB#"
 	echo -e "${SIG_BANNER_RESET}"
-    https://www.physics.princeton.edu/pulsar/k1jt/wsjtx_2.5.0_amd64.deb -P $HOME/Downloads
+    wget https://www.physics.princeton.edu/pulsar/k1jt/wsjtx_2.5.0_amd64.deb -P $HOME/Downloads
 	sudo dpkg -i $HOME/Downloads/wsjtx_2.5.0_amd64.deb
 	# Will get error next command fixes error and downloads dependencies
 	sudo apt-get --fix-broken install
@@ -1020,7 +1029,13 @@ fi
 # SDRangel
 if grep sdrangel "$SIG_CONFIG"
 then
-    install_sdrangel_deb
+    install_sdrangel
+fi
+
+# SDR++
+if grep sdrplusplus "$SIG_CONFIG"
+then
+    install_sdrplusplus
 fi
 
 ##
@@ -1035,9 +1050,11 @@ echo -e "${SIG_BANNER_COLOR} #SIGDEB#"
 echo -e "${SIG_BANNER_RESET}"
 
 # Fldigi
-if grep fldigi "$SIG_CONFIG"
+if grep "$FLDIGI_VER" "$SIG_CONFIG"
 then
     install_fldigi
+else
+	sudo apt-get install -y fldigi
 fi
 
 # DireWolf
@@ -1066,30 +1083,20 @@ then
 fi
 
 # WSJT-X
-if grep wsjtx-2.4.0 "$SIG_CONFIG"
+if grep "$WSJTX_VER" "$SIG_CONFIG"
 then
     install_wsjtx
 else
 	sudo apt-get install -y wsjtx
 fi
 
-#SIGPKGCHK=$(cat $SIG_CONFIG |grep "WSJT-Xc")
-#if $SIGPKGCHK="WSJT-Xc" ;then
-#    install_wsjtx
-#fi
-
 # QSSTV
-if grep qsstv-9.5.8 "$SIG_CONFIG"
+if grep "$QSSTV_VER" "$SIG_CONFIG"
 then
 	install_qsstv
 else
     sudo apt-get install -y qsstv
 fi
-
-#SIGPKGCHK=$(cat $SIG_CONFIG |grep "QSSTVc")
-#if $SIGPKGCHK="QSSTVc" ;then
-#    install_qsstv
-#fi
 
 # Gpredict
 if grep gpredict "$SIG_CONFIG"
@@ -1135,7 +1142,7 @@ fi
 # Audcacity
 if grep audacity "$SIG_CONFIG"
 then
-    sudo apt-get install -y audcacity
+    sudo apt-get install -y audacity
 fi
 
 # PAVU

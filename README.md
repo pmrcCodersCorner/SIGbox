@@ -120,36 +120,19 @@ qtpositioning5-dev qtlocation5-dev libqt5texttospeech5-dev libqwt-qt5-dev
 
 - Login as a user with sudo privileges
 - Install tools you will need to build and compile applications
+- Create a directory in your home called source and switch into it
+- Clone the Repo
+- Change directory into SIGdeb
+- Run SIGdeb_installer.sh
+- Follow script instructions.
 
 ```
 sudo apt-get install -y build-essential git
-```
-
-- Create a directory in your home called source and switch into it
-
-```
 mkdir ~/source && cd ~/source
-```
-- Clone the Repo
-
-```
 git clone https://github.com/joecupano/SIGdeb.git
-```
-
-- Change directory into SIGbox
-
-```
 cd SIGdeb
-```
-
-- Run SIGdeb_installer.sh
-
-```
 ./SIGdeb_installer.sh
 ```
-
-Follow script instructions.
-
 ## Distro versus Compiled Software versions
 
 Go with the distro releases of software packages for classic and common use cases.
@@ -186,7 +169,7 @@ If you are planning to operate APRS and Packet Radio with a transceiver then con
 
 ### AX.25
 
-You will need to edit a line in the /etc/ax25/axports file as follows:
+You will need to edit a line in the /etc/ax25/axports file as follows:sudo apt-get install -y build-essential git
 
 ```
 sudo nano /etc/ax25/axports

@@ -185,6 +185,7 @@ select_hamradio() {
         "direWolf" "DireWolf 1.7 Soundcard TNC for APRS " OFF \
         "linpac" "Packet Radio Temrinal with mail client " OFF \
         "xastir" "APRS Station Tracking and Reporting " OFF \
+		"gpredict" "Satellite Tracking " OFF \
         3>&1 1>&2 2>&3)
     RET=$?
     if [ $RET -eq 1 ]; then
@@ -202,7 +203,6 @@ select_utilities() {
         "pavu" "PulseAudio Control " OFF \
         "mumble" "VoIP Server and Client " OFF \
         "gps" "GPS client and NTP sync " OFF \
-        "gpredict" "Satellite Tracking " OFF \
         "splat" "RF Signal Propagation, Loss, And Terrain analysis tool for 20 MHz to 20 GHz " OFF \
         3>&1 1>&2 2>&3)
     RET=$?
@@ -595,7 +595,9 @@ install_sdrangel(){
 	-DCMAKE_INSTALL_PREFIX=/opt/install/sdrangel ..
 	make -j4 install
 	# Copy special startup script for this snowflake
-	sudo cp $SIGDEB_HOME/snowflakes/SIGdeb_sdrangel.sh /usr/local/bin
+	sudo cp $SIGDEB_HOME/tools/SIGdeb_sdrangel.sh /usr/local/bin
+	# Copy Desktop file
+	sudo cp $SIGDEB_SOURCE/SDRangel/sdrangel/build/sdrangel.desktop $DESKTOP_FILES
 
     cd $HOME/.config/
 	mkdir f4exb
@@ -616,7 +618,7 @@ install_sdrplusplus(){
 	echo -e "${SIG_BANNER_COLOR} #SIGDEB#   Install SDRplusplus"
 	echo -e "${SIG_BANNER_COLOR} #SIGDEB#"
 	echo -e "${SIG_BANNER_RESET}"
-	wget https://github.com/AlexandreRouma/SDRPlusPlus/releases/download/1.0.3/sdrpp_ubuntu_focal_amd64.deb
+	wget https://github.com/AlexandreRouma/SDRPlusPlus/releases/download/1.0.3/sdrpp_ubuntu_focal_amd64.deb $HOME/Downloads
 	sudo apt install libfftw3-dev libglfw3-dev libglew-dev libvolk2-dev libsoapysdr-dev libairspyhf-dev libiio-dev libad9361-dev librtaudio-dev libhackrf-dev
 	sudo dpkg -i $HOME/Downloads/sdrpp_ubuntu_focal_amd64.deb
 }
@@ -706,7 +708,7 @@ install_qsstv(){
 install_sigdebmenu(){
 	echo -e "${SIG_BANNER_COLOR}"
 	echo -e "${SIG_BANNER_COLOR} #SIGDEB#"
-	echo -e "${SIG_BANNER_COLOR} #SIGDEB#   Install SIGdeb Menu and Desktop Shortcuts"
+	echo -e "${SIG_BANNER_COLOR} #SIGDEB#   Install SIGdeb Desktop Shortcuts"
 	echo -e "${SIG_BANNER_COLOR} #SIGDEB#"
 	echo -e "${SIG_BANNER_RESET}"
     
@@ -716,8 +718,6 @@ install_sigdebmenu(){
 	
 	#sudo cp $SIGDEB_DESKTOP/sigdeb_example.desktop $DESKTOP_FILES
 	sudo cp $SIGDEB_SOURCE/LimeSuite/Desktop/lime-suite.desktop $DESKTOP_FILES
-	sudo cp $SIGDEB_SOURCE/gnuradio/grc/scripts/freedesktop/gnuradio-grc.desktop $DESKTOP_FILES
-	sudo cp $SIGDEB_SOURCE/SDRangel/sdrangel/build/sdrangel.desktop $DESKTOP_FILES
 	sudo cp $SIGDEB_SOURCE/flrig-1.4.2/data/flrig.desktop $DESKTOP_FILES
 	sudo cp $SIGDEB_SOURCE/fldigi-4.1.20/data/flarq.desktop $DESKTOP_FILES
 	sudo cp $SIGDEB_SOURCE/fldigi-4.1.20/data/fldigi.desktop $DESKTOP_FILES
@@ -733,7 +733,7 @@ install_sigdebmenu(){
 
 	sudo cp $SIGDEB_DESKTOP/sigidwiki.desktop $USER/Desktop/sigidwiki.desktop
 	sudo cp $SIGDEB_DESKTOP/sigdeb_home.desktop $USER/Desktop/sigdeb_home.desktop
-	sudo cp $DESKTOP_FILES/gnuradio-grce.desktop $USER/Desktop/gnuradio-grc.desktop
+	sudo cp $DESKTOP_FILES/gnuradio-grc.desktop $USER/Desktop/gnuradio-grc.desktop
 }
 
 config_stuff(){
@@ -769,15 +769,15 @@ echo -e "${SIG_BANNER_RESET}"
 
 sudo apt-get -y update
 sudo apt-get -y upgrade
-TERM=ansi whiptail --title "SIGdeb Installer" --msgbox "Install Dependencies" 12 120
+##UNCOMMEN FOR DEBUG## TERM=ansi whiptail --title "SIGdeb Installer" --msgbox "Install Dependencies" 12 120
 install_dependencies
-TERM=ansi whiptail --title "SIGdeb Installer" --msgbox "Install Libraries" 12 120
+##UNCOMMEN FOR DEBUG## TERM=ansi whiptail --title "SIGdeb Installer" --msgbox "Install Libraries" 12 120
 install_libraries
 
 ##
 ##  INSTALL DRIVERS
 ##
-TERM=ansi whiptail --title "SIGdeb Installer" --msgbox "Install Drivers" 12 120
+##UNCOMMEN FOR DEBUG## TERM=ansi whiptail --title "SIGdeb Installer" --msgbox "Install Drivers" 12 120
 
 echo -e "${SIG_BANNER_COLOR}"
 echo -e "${SIG_BANNER_COLOR} #SIGDEB#"
@@ -904,18 +904,20 @@ then
 	sudo ldconfig
 fi
 
+
 ##
 ## INSTALL GNURADIO
 ##
-TERM=ansi whiptail --title "SIGdeb Installer" --msgbox "Install GNUradio 3.8" 12 120
-
+##UNCOMMEN FOR DEBUG## TERM=ansi whiptail --title "SIGdeb Installer" --msgbox "Install GNUradio 3.8" 12 120
 sudo apt-get install -y gnuradio gnuradio-dev
+# Copy Desktop
+sudo cp $SIGDEB_SOURCE/gnuradio/grc/scripts/freedesktop/gnuradio-grc.desktop $DESKTOP_FILES
 
-TERM=ansi whiptail --title "SIGdeb Installer" --msgbox "Decoders" 12 120
+
 ##
 ## INSTALL DECODERS
 ##
-
+##UNCOMMEN FOR DEBUG## TERM=ansi whiptail --title "SIGdeb Installer" --msgbox "Decoders" 12 120
 echo -e "${SIG_BANNER_COLOR}"
 echo -e "${SIG_BANNER_COLOR} #SIGDEB#"
 echo -e "${SIG_BANNER_COLOR} #SIGDEB#   Install Decoders"
@@ -966,7 +968,7 @@ fi
 ##
 ## INSTALL SDRAPPS
 ##
-TERM=ansi whiptail --title "SIGdeb Installer" --msgbox "Install SDRapps" 12 120
+##UNCOMMEN FOR DEBUG## TERM=ansi whiptail --title "SIGdeb Installer" --msgbox "Install SDRapps" 12 120
 
 echo -e "${SIG_BANNER_COLOR}"
 echo -e "${SIG_BANNER_COLOR} #SIGDEB#"
@@ -1015,7 +1017,7 @@ fi
 ##
 ## INSTALL AMATEUR RADIO APPLICATIONS
 ##
-TERM=ansi whiptail --title "SIGdeb Installer" --msgbox "Install Amateur Radio Apps" 12 120
+##UNCOMMEN FOR DEBUG## TERM=ansi whiptail --title "SIGdeb Installer" --msgbox "Install Amateur Radio Apps" 12 120
 
 echo -e "${SIG_BANNER_COLOR}"
 echo -e "${SIG_BANNER_COLOR} #SIGDEB#"
@@ -1081,7 +1083,7 @@ fi
 ##
 ## INSTALL OTHER APPS
 ##
-TERM=ansi whiptail --title "SIGdeb Installer" --msgbox "Install Other Apps" 12 120
+##UNCOMMEN FOR DEBUG## TERM=ansi whiptail --title "SIGdeb Installer" --msgbox "Install Other Apps" 12 120
 
 echo -e "${SIG_BANNER_COLOR}"
 echo -e "${SIG_BANNER_COLOR} #SIGDEB#"
@@ -1143,7 +1145,12 @@ then
     sudo apt-get install -y mumble-server mumble
 fi
 
-TERM=ansi whiptail --title "SIGdeb Installer" --msgbox "Install Desktop items" 12 120
+
+##
+## INSTALL DESKTOP ITEMS
+##
+##UNCOMMEN FOR DEBUG## TERM=ansi whiptail --title "SIGdeb Installer" --msgbox "Install Desktop items" 12 120
+
 install_sigdebmenu
 
 echo -e "${SIG_BANNER_COLOR}"

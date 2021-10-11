@@ -114,9 +114,6 @@ select_decoders() {
         "ubertooth-tools" "Bluetooth BLE and BR tools for Ubertooth device" ON \
         3>&1 1>&2 2>&3)
     RET=$?
-    if [ $RET -eq 1 ]; then
-        $FUN = "NONE"
-    fi
     echo $FUN >> $SIGBOX_CONFIG
 }
 
@@ -127,9 +124,6 @@ select_sdrapps() {
 		"sdrplusplus" "SDR++ " OFF \
         3>&1 1>&2 2>&3)
     RET=$?
-    if [ $RET -eq 1 ]; then
-        $FUN = "NONE"
-    fi
     echo $FUN >> $SIGBOX_CONFIG
 }
 
@@ -141,9 +135,6 @@ select_amateurradio() {
 		"qsstv-9.4.4" "A graphicall application for Slow Scan Television" OFF \
         3>&1 1>&2 2>&3)
     RET=$?
-    if [ $RET -eq 1 ]; then
-        $FUN = "NONE"
-    fi
     echo $FUN >> $SIGBOX_CONFIG
 
     FUN=$(whiptail --title "Packet Radio and APRS" --checklist --separate-output \
@@ -153,9 +144,6 @@ select_amateurradio() {
         "xastir" "APRS Station Tracking and Reporting " OFF \
         3>&1 1>&2 2>&3)
     RET=$?
-    if [ $RET -eq 1 ]; then
-        $FUN = "NONE"
-    fi
     echo $FUN >> $SIGBOX_CONFIG
 }
 
@@ -171,9 +159,6 @@ select_usefulapps() {
         
         3>&1 1>&2 2>&3)
     RET=$?
-    if [ $RET -eq 1 ]; then
-        $FUN = "NONE"
-    fi
     echo $FUN >> $SIGBOX_CONFIG
 }
 

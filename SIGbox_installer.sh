@@ -464,11 +464,22 @@ install_sdrplusplus(){
 	echo -e "${SIGBOX_BANNER_COLOR} #SIGBOX#"
 	echo -e "${SIGBOX_BANNER_RESET}"
 
+	cmake ../ -DOPT_BUILD_AUDIO_SINK=OFF \
+	-DOPT_BUILD_BLADERF_SOURCE=OFF \
+	-DOPT_BUILD_M17_DECODER=ON \
+	-DOPT_BUILD_NEW_PORTAUDIO_SINK=ON \
+	-DOPT_BUILD_PLUTOSDR_SOURCE=ON \
+	-DOPT_BUILD_PORTAUDIO_SINK=ON \
+	-DOPT_BUILD_SOAPY_SOURCE=ON \
+	-DOPT_BUILD_AIRSPY_SOURCE=OFF
+	make -j4sudo make install
+	sudo ldconfig
+
 	# SDRplusplus dependencies
-	sudo apt-get install -y libfftw3-dev libglfw3-dev libglew-dev libvolk2-dev libsoapysdr-dev libairspyhf-dev libiio-dev libad9361-dev librtaudio-dev libhackrf-dev
-	
-	wget https://github.com/AlexandreRouma/SDRPlusPlus/releases/download/1.0.3/sdrpp_ubuntu_focal_amd64.deb -D $HOME/Downloads
-	sudo dpkg -i $HOME/Downloads/sdrpp_ubuntu_focal_amd64.deb
+	#sudo apt-get install -y libfftw3-dev libglfw3-dev libglew-dev libvolk2-dev libsoapysdr-dev libairspyhf-dev libiio-dev libad9361-dev librtaudio-dev libhackrf-dev
+	#
+	#wget https://github.com/AlexandreRouma/SDRPlusPlus/releases/download/1.0.3/sdrpp_ubuntu_focal_amd64.deb -D $HOME/Downloads
+	#sudo dpkg -i $HOME/Downloads/sdrpp_ubuntu_focal_amd64.deb
 }
 
 install_kismet(){
@@ -825,16 +836,17 @@ cd $SIGBOX_SOURCE
 git clone https://github.com/f4exb/serialDV.git
 cd serialDV
 mkdir build; cd build
-cmake ..	# Codec2/FreeDV
+cmake ..	
+make -j4 
+sudo make install
+sudo ldconfig
 
-# Codec2 is already installed from the packager, but this version is required for SDRangel.
-cd $SIGBOX_SDRANGEL
+# Codec2/FreeDV
+cd $SIGBOX_SOURCE
 git clone https://github.com/drowe67/codec2.git
 cd codec2
-git reset --hard 76a20416d715ee06f8b36a9953506876689a3bd2
-mkdir build_linux; cd build_linux
-cmake -Wno-dev -DCMAKE_INSTALL_PREFIX=/opt/install/codec2 ..
-make -j $(nproc) install
+mkdir build && cd build
+cmake ..
 make -j4
 sudo make install
 sudo ldconfig

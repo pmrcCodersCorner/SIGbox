@@ -30,7 +30,7 @@ QSSTV_VER="qsstv_9.4.4"
 SIGBOX_SOURCE=$HOME/source
 
 # SIGbox Home directory
-SIGBOX_HOME=$SIGBOX_SOURCE/SIGbox
+SIGBOX_HOME=$SIGBOX_SOURCE/SIGdeb
 
 # SDRangel Source directory
 SIGBOX_SDRANGEL=$SIGBOX_SOURCE/SDRangel
@@ -136,9 +136,9 @@ select_sdrapps() {
 select_amateurradio() {
     FUN=$(whiptail --title "Amateur Radio Digital Modes" --checklist --separate-output \
         "Choose which applications you want installed" 20 80 12 \
-        "fldigi-4.1.01" "A graphical application for CW, RTTY, PSK31, MFSK and many others" OFF \
-		"wsjt-x" "A graphical application for weak signal communications using FT8, JT4, JT9, JT65, MSK144, and WSPR" OFF \
-		"qsstv-9.2.6" "A graphicall application for Slow Scan Television" OFF \
+        "fldigi-4.1.06" "A graphical application for CW, RTTY, PSK31, MFSK and many others" OFF \
+		"wsjt-x_2.5.0" "A graphical application for using FT8, JT4, JT9, JT65, MSK144, and WSPR" OFF \
+		"qsstv-9.4.4" "A graphicall application for Slow Scan Television" OFF \
         3>&1 1>&2 2>&3)
     RET=$?
     if [ $RET -eq 1 ]; then

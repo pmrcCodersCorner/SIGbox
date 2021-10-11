@@ -51,7 +51,7 @@ DESKTOP_DIRECTORY=/usr/share/desktop-directories
 DESKTOP_FILES=/usr/share/applications
 DESKTOP_ICONS=/usr/share/icons
 DESKTOP_XDG_MENU=/usr/share/extra-xdg-menus
-f
+
 # SIGbox Install Support files
 SIGBOX_CONFIG=$SIGBOX_HOME/SIGBOX_installer_config.txt
 SIGBOX_INSTALL_TXT1=$SIGBOX_HOME/updates/SIGbox-installer-1.txt
@@ -131,7 +131,7 @@ select_amateurradio() {
     FUN=$(whiptail --title "Amateur Radio Digital Modes" --checklist --separate-output \
         "Choose which applications you want installed" 20 100 12 \
         "fldigi-4.1.06" "A graphical application for CW, RTTY, PSK31, MFSK and many others" OFF \
-		"wsjt-x_2.5.0" "A graphical application for using FT8, JT4, JT9, JT65, MSK144, and WSPR" OFF \
+		"wsjt-x_2.5.0" "A graphical application for using FT8, JT4, JT9, JT65, MSK144, and WSPR " OFF \
 		"qsstv-9.4.4" "A graphicall application for Slow Scan Television" OFF \
         3>&1 1>&2 2>&3)
     RET=$?
@@ -681,8 +681,7 @@ then
 fi
 
 # SoapySDR
-#
-if grep SoapySDR "$SIGBOX_CONFIG"
+if grep soapysdr "$SIGBOX_CONFIG"
 then
     cd $SIGBOX_SOURCE
 	git clone https://github.com/pothosware/SoapySDR.git
@@ -696,7 +695,7 @@ then
 fi
 
 # SoapyRTLSDR
-if grep SoapyRTLSDR "$SIGBOX_CONFIG"
+if grep soapyrtlsdr "$SIGBOX_CONFIG"
 then
     cd $SIGBOX_SOURCE
 	git clone https://github.com/pothosware/SoapyRTLSDR.git
@@ -709,7 +708,7 @@ then
 fi
 
 # SoapyHackRF
-if grep SoapyHackRF "$SIGBOX_CONFIG"
+if grep soapyhackrf "$SIGBOX_CONFIG"
 then
     cd $SIGBOX_SOURCE
 	git clone https://github.com/pothosware/SoapyHackRF.git
@@ -722,7 +721,7 @@ then
 fi
 
 # SoapyPlutoSDR
-if grep SoapyPlutoSDR "$SIGBOX_CONFIG"
+if grep soapyplutosdr "$SIGBOX_CONFIG"
 then
     cd $SIGBOX_SOURCE
 	git clone https://github.com/pothosware/SoapyPlutoSDR
@@ -735,7 +734,7 @@ then
 fi
 
 # SoapyRemote
-if grep SoapyRemote "$SIGBOX_CONFIG"
+if grep soapyremote "$SIGBOX_CONFIG"
 then
      cd $SIGBOX_SOURCE
 	git clone https://github.com/pothosware/SoapyRemote.git

@@ -565,12 +565,12 @@ install_SIGBOXmenu(){
 	# Copy Menu items into relevant directories
 	# 
 	
-	#sudo cp $SIGBOX_DESKTOP/SIGBOX_example.desktop $DESKTOP_FILES
+	sudo cp $SIGBOX_DESKTOP/SIGbox_example.desktop $DESKTOP_FILES
 	sudo cp $SIGBOX_SOURCE/LimeSuite/Desktop/lime-suite.desktop $DESKTOP_FILES
-	sudo cp $SIGBOX_SOURCE/flrig-1.4.2/data/flrig.desktop $DESKTOP_FILES
-	sudo cp $SIGBOX_SOURCE/fldigi-4.1.20/data/flarq.desktop $DESKTOP_FILES
-	sudo cp $SIGBOX_SOURCE/fldigi-4.1.20/data/fldigi.desktop $DESKTOP_FILES
-	sudo cp $SIGBOX_SOURCE/qsstv/qsstv.desktop $DESKTOP_FILES
+	#sudo cp $SIGBOX_SOURCE/flrig-1.4.2/data/flrig.desktop $DESKTOP_FILES
+	#sudo cp $SIGBOX_SOURCE/fldigi-4.1.20/data/flarq.desktop $DESKTOP_FILES
+	#sudo cp $SIGBOX_SOURCE/fldigi-4.1.20/data/fldigi.desktop $DESKTOP_FILES
+	#sudo cp $SIGBOX_SOURCE/qsstv/qsstv.desktop $DESKTOP_FILES
 	sudo cp $SIGBOX_DESKTOP/*.desktop $DESKTOP_FILES
 	sudo cp $SIGBOX_DESKTOP/SIGbox.directory $DESKTOP_DIRECTORY
 	sudo cp $SIGBOX_DESKTOP/SIGbox.menu $DESKTOP_XDG_MENU
@@ -580,9 +580,9 @@ install_SIGBOXmenu(){
 	# Add SIGbox Category for each installed application
 	#
 
-	sudo cp $SIGBOX_DESKTOP/sigidwiki.desktop $USER/Desktop/sigidwiki.desktop
-	sudo cp $SIGBOX_DESKTOP/SIGBOX_home.desktop $USER/Desktop/SIGBOX_home.desktop
-	sudo cp $DESKTOP_FILES/gnuradio-grc.desktop $USER/Desktop/gnuradio-grc.desktop
+	sudo cp $SIGBOX_DESKTOP/sigidwiki.desktop /home/$USER/Desktop/sigidwiki.desktop
+	sudo cp $SIGBOX_DESKTOP/SIGBOX_home.desktop /home/$USER/Desktop/SIGbox_home.desktop
+	#sudo cp $DESKTOP_FILES/gnuradio-grc.desktop $USER/Desktop/gnuradio-grc.desktop
 }
 
 
@@ -747,7 +747,7 @@ then
 fi
 
 ##
-##  INSTALL LIBRARIERS
+##  INSTALL LIBRARIES
 ##
 TERM=ansi whiptail --title "SIGbox Installer" --msgbox "Install Libraries" 12 120
 echo -e "${SIGBOX_BANNER_COLOR}"
@@ -893,15 +893,6 @@ sudo ldconfig
 
 
 ##
-## INSTALL GNURADIO
-##
-TERM=ansi whiptail --title "SIGbox Installer" --msgbox "Install GNUradio 3.8" 12 120
-sudo apt-get install -y gnuradio gnuradio-dev
-# Copy Desktop
-sudo cp $SIGBOX_SOURCE/gnuradio/grc/scripts/freedesktop/gnuradio-grc.desktop $DESKTOP_FILES
-
-
-##
 ## INSTALL DECODERS
 ##
 TERM=ansi whiptail --title "SIGbox Installer" --msgbox "Decoders" 12 120
@@ -950,6 +941,15 @@ then
 	sudo make install
 	sudo ldconfig
 fi
+
+
+##
+## INSTALL GNURADIO
+##
+TERM=ansi whiptail --title "SIGbox Installer" --msgbox "Install GNUradio 3.8" 12 120
+sudo apt-get install -y gnuradio gnuradio-dev
+# Copy Desktop
+sudo cp $SIGBOX_SOURCE/gnuradio/grc/scripts/freedesktop/gnuradio-grc.desktop $DESKTOP_FILES
 
 
 ##
@@ -1074,7 +1074,7 @@ fi
 # GPS
 if grep gps "$SIGBOX_CONFIG"
 then
-    sudo apt-get install -y gpsd gpsd-clients python-gps chrony
+    sudo apt-get install -y gpsd gpsd-client python-gps chrony
 fi
 
 # Gpredict

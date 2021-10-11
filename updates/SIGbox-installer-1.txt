@@ -1,4 +1,4 @@
-Welcome to SIGdebi-installer
+Welcome to SIGdeb-installer
 
 Given a Ubuntu 20.04 desktop installed, this script installs drivers
 and applications for signals intelligence (SIGINT) and Amateur Radio use.

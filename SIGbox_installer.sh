@@ -129,7 +129,7 @@ select_sdrapps() {
 
 select_amateurradio() {
     FUN=$(whiptail --title "Amateur Radio Digital Modes" --checklist --separate-output \
-        "Choose which applications you want installed" 20 80 12 \
+        "Choose which applications you want installed" 20 100 12 \
         "fldigi-4.1.06" "A graphical application for CW, RTTY, PSK31, MFSK and many others" OFF \
 		"wsjt-x_2.5.0" "A graphical application for using FT8, JT4, JT9, JT65, MSK144, and WSPR" OFF \
 		"qsstv-9.4.4" "A graphicall application for Slow Scan Television" OFF \
@@ -197,36 +197,27 @@ install_dependencies(){
 	sudo apt-get install -y libavformat-dev libfltk1.3-dev libfltk1.3 libsndfile1-dev libopus-dev libavahi-common-dev libavahi-client-dev libavdevice-dev libavutil-dev
 	sudo apt-get install -y libsdl1.2-dev libgsl-dev liblog4cpp5-dev libzmq3-dev liborc-0.4 liborc-0.4-0 liborc-0.4-dev libsamplerate0-dev libgmp-dev
 	sudo apt-get install -y libpcap-dev libcppunit-dev libbluetooth-dev qt5-default libpulse-dev libliquid-dev libswscale-dev libswresample-dev
-	sudo apt-get install -y libgles1 libosmesa6 gmp-doc libgmp10-doc libmpfr-dev libmpfrc++-dev libntl-dev libcppunit-doc zlib-devel libpng-devel
+	sudo apt-get install -y libgles1 libosmesa6 gmp-doc libgmp10-doc libmpfr-dev libmpfrc++-dev libntl-dev libcppunit-doc zlib-dev libpng-dev
 	
 	sudo apt-get install -y libcanberra-gtk-module libcanberra-gtk0 libcppunit-1.15-0 libcppunit-dev  
 	sudo apt-get install -y libfreesrp0 libglfw3 libgmp-dev libgmpxx4ldbl libhidapi-libusb0 libicu-dev libjs-jquery-ui 
-	sudo apt-get install -y liblog4cpp5-dev liblog4cpp5v5 libfaad libfaad-dev
+	sudo apt-get install -y liblog4cpp5-dev liblog4cpp5v5 faad libfaad2 libfaad-dev
 
 	sudo apt-get install -y python3-pip python3-numpy python3-mako python3-sphinx python3-lxml python3-yaml python3-click python3-click-plugins 
 	sudo apt-get install -y python3-zmq python3-scipy python3-scapy python3-setuptools python3-pyqt5 python3-gi-cairo python-docutils python-gobject python3-nose
 
 	sudo apt-get install -y python3-tornado texlive-extra-utils python-networkx-doc python3-gdal python3-pygraphviz python3-pydot libgle3 python-pyqtgraph-doc 
 	sudo apt-get install -y python-matplotlib-doc python3-cairocffi python3-tk-dbg python-matplotlib-data python3-cycler python3-kiwisolver python3-matplotlib python3-networkx 
-	sudo apt-get install -y python3-opengl python3-pyqt5.qtopengl python3-pyqtgraph python3-tk python-pyside python-qt4 python3-qwt-qt5
+	sudo apt-get install -y python3-opengl python3-pyqt5.qtopengl python3-pyqtgraph python3-tk
 
 	sudo python3 -m pip install --upgrade pip
 	sudo pip3 install pygccxml
+	sudo pip3 install PyQt5
+	sudo pip3 install PyQt4
+	sudo pip3 install PySide
 
 	# RTL-SDR Dependencies
 	sudo apt-get install -y libusb-1.0-0-dev
-
-	# SDRangel Dependencies
-	sudo apt-get install -y git cmake g++ pkg-config autoconf automake libtool libfftw3-dev libusb-1.0-0-dev libusb-dev \
-	qtbase5-dev qtchooser libqt5multimedia5-plugins qtmultimedia5-dev libqt5websockets5-dev qttools5-dev qttools5-dev-tools libqt5opengl5-dev \
-	qtbase5-dev libqt5quick5 libqt5charts5-dev qml-module-qtlocation  qml-module-qtlocation qml-module-qtpositioning qml-module-qtquick-window2 \
-	qml-module-qtquick-dialogs qml-module-qtquick-controls qml-module-qtquick-controls2 qml-module-qtquick-layouts \
-	libqt5serialport5-dev qtdeclarative5-dev qtpositioning5-dev qtlocation5-dev libqt5texttospeech5-dev \
-	libfaad-dev zlib1g-dev libboost-all-dev libasound2-dev pulseaudio libopencv-dev libxml2-dev bison flex \
-	ffmpeg libavcodec-dev libavformat-dev libopus-dev doxygen graphviz
-
-	# SDRplusplus dependencies
-	sudo apt-get install -y libfftw3-dev libglfw3-dev libglew-dev libvolk2-dev libsoapysdr-dev libairspyhf-dev libiio-dev libad9361-dev librtaudio-dev libhackrf-dev
 
 	# APTdec dependencies
 	sudo apt-get install -y libsndfile-dev libpng-dev
@@ -243,19 +234,7 @@ install_dependencies(){
 	# Codec2
 	sudo apt-get install -y octave octave-common octave-signal liboctave-dev gnuplot python3-numpy sox valgrind
 
-	# Fldigi
-	sudo apt-get install -y libfltk-images1.3 libfltk1.3 libflxmlrpc1 libgcc-s1 libhamlib2 libmbedcrypto3 libmbedtls12 libmbedx509-0 \
-	libpng16-16 libportaudio2 libpulse0 libsamplerate0 libsndfile1
-
-	# WSJT-X
-	sudo apt-get install -y libgfortran5 libqt5widgets5 libqt5network5 libqt5printsupport5 libqt5multimedia5-plugins libqt5serialport5 \
-    libqt5sql5-sqlite libfftw3-single3 libgomp1 libboost-all-dev libusb-1.0-0
-
 	# QSSTV - None
-
-	# SPLAT
-	sudo apt-get install -y aglfn gnuplot gnuplot-data gnuplot-qt gnuplot-doc
-
 
 }
 
@@ -270,6 +249,15 @@ install_sdrangel_compile(){
 	sudo chown $USER:users /opt/build
 	sudo mkdir -p /opt/install
 	sudo chown $USER:users /opt/install
+
+	# SDRangel Dependencies
+	sudo apt-get install -y git cmake g++ pkg-config autoconf automake libtool libfftw3-dev libusb-1.0-0-dev libusb-dev \
+	qtbase5-dev qtchooser libqt5multimedia5-plugins qtmultimedia5-dev libqt5websockets5-dev qttools5-dev qttools5-dev-tools libqt5opengl5-dev \
+	qtbase5-dev libqt5quick5 libqt5charts5-dev qml-module-qtlocation  qml-module-qtlocation qml-module-qtpositioning qml-module-qtquick-window2 \
+	qml-module-qtquick-dialogs qml-module-qtquick-controls qml-module-qtquick-controls2 qml-module-qtquick-layouts \
+	libqt5serialport5-dev qtdeclarative5-dev qtpositioning5-dev qtlocation5-dev libqt5texttospeech5-dev \
+	libfaad-dev zlib1g-dev libboost-all-dev libasound2-dev pulseaudio libopencv-dev libxml2-dev bison flex \
+	ffmpeg libavcodec-dev libavformat-dev libopus-dev doxygen graphviz
 
 	# APT
 	# Aptdec is a FOSS program that decodes images transmitted by NOAA weather satellites.
@@ -475,6 +463,10 @@ install_sdrplusplus(){
 	echo -e "${SIGBOX_BANNER_COLOR} #SIGBOX#   Install SDRplusplus"
 	echo -e "${SIGBOX_BANNER_COLOR} #SIGBOX#"
 	echo -e "${SIGBOX_BANNER_RESET}"
+
+	# SDRplusplus dependencies
+	sudo apt-get install -y libfftw3-dev libglfw3-dev libglew-dev libvolk2-dev libsoapysdr-dev libairspyhf-dev libiio-dev libad9361-dev librtaudio-dev libhackrf-dev
+	
 	wget https://github.com/AlexandreRouma/SDRPlusPlus/releases/download/1.0.3/sdrpp_ubuntu_focal_amd64.deb $HOME/Downloads
 	sudo apt install libfftw3-dev libglfw3-dev libglew-dev libvolk2-dev libsoapysdr-dev libairspyhf-dev libiio-dev libad9361-dev librtaudio-dev libhackrf-dev
 	sudo dpkg -i $HOME/Downloads/sdrpp_ubuntu_focal_amd64.deb
@@ -628,138 +620,6 @@ install_dependencies
 ##
 ##  INSTALL DRIVERS
 ##
-TERM=ansi whiptail --title "SIGbox Installer" --msgbox "Install Libraries" 12 120
-echo -e "${SIGBOX_BANNER_COLOR}"
-echo -e "${SIGBOX_BANNER_COLOR} #SIGBOX#"
-echo -e "${SIGBOX_BANNER_COLOR} #SIGBOX#   Install Decoders"
-echo -e "${SIGBOX_BANNER_COLOR} #SIGBOX#"
-echo -e "${SIGBOX_BANNER_RESET}"
-cd $SIGBOX_SOURCE
-
-# APT
-# Aptdec is a FOSS program that decodes images transmitted by NOAA weather satellites.
-cd $SIGBOX_SOURCE
-sudo apt install libsndfile-dev libpng-dev
-git clone https://github.com/Xerbo/aptdec.git && cd aptdec
-mkdir build && cd build
-cmake -DCMAKE_BUILD_TYPE=Release ..
-make
-
-# CM256cc
-cd $SIGBOX_SOURCE
-git clone https://github.com/f4exb/cm256cc.git
-cd cm256cc
-mkdir build; cd build
-cmake ..
-make -j4
-sudo make install
-sudo ldconfig
-
-# LibDAB
-cd $SIGBOX_SOURCE
-git clone https://github.com/srcejon/dab-cmdline
-cd dab-cmdline/library
-mkdir build; cd build
-cmake ..
-make -j4
-sudo make install
-sudo ldconfig
-
-# MBElib 1.3.0 
-#
-# Supports the 7200x4400 bit/s codec used in P25 Phase 1, the 7100x4400 bit/s codec used
-# in ProVoice and the "Half Rate" 3600x2250 bit/s vocoder used in various radio systems
-cd $SIGBOX_SOURCE
-git clone https://github.com/szechyjs/mbelib.git
-cd mbelib
-mkdir build; cd build
-cmake ..
-make -j4
-sudo make install
-sudo ldconfig
-
-# SerialDV
-cd $SIGBOX_SOURCE
-git clone https://github.com/f4exb/serialDV.git
-cd serialDV
-mkdir build; cd build
-cmake ..	# Codec2/FreeDV
-
-# Codec2 is already installed from the packager, but this version is required for SDRangel.
-cd $SIGBOX_SDRANGEL
-git clone https://github.com/drowe67/codec2.git
-cd codec2
-git reset --hard 76a20416d715ee06f8b36a9953506876689a3bd2
-mkdir build_linux; cd build_linux
-cmake -Wno-dev -DCMAKE_INSTALL_PREFIX=/opt/install/codec2 ..
-make -j $(nproc) install
-make -j4
-sudo make install
-sudo ldconfig
-
-# DSDcc
-cd $SIGBOX_SOURCE
-git clone https://github.com/f4exb/dsdcc.git
-cd dsdcc
-mkdir build; cd build
-cmake ..
-make -j4
-sudo make install
-sudo ldconfig
-
-# SGP4
-# python-sgp4 1.4-1 is available in the packager, installing this version just to be sure.
-cd $SIGBOX_SOURCE
-git clone https://github.com/dnwrnr/sgp4.git
-cd sgp4
-mkdir build; cd build
-cmake ..
-make -j4
-sudo make install
-sudo ldconfig
-
-# LibSigMF
-cd $SIGBOX_SOURCE
-git clone https://github.com/deepsig/libsigmf.git
-cd libsigmf
-mkdir build; cd build
-cmake ..
-make -j4
-sudo make install
-sudo ldconfig
-	
-# Liquid-DSP
-cd $SIGBOX_SOURCE
-git clone https://github.com/jgaeddert/liquid-dsp.git
-cd liquid-dsp
-./bootstrap.sh
-./configure --enable-fftoverride 
-make -j4
-sudo make install
-sudo ldconfig
-
-# Bluetooth Baseband Library
-cd $SIGBOX_SOURCE
-git clone https://github.com/greatscottgadgets/libbtbb.git
-cd libbtbb
-mkdir build && cd build
-cmake ..
-make -j4
-sudo make install
-sudo ldconfig
-
-# Hamlib
-wget https://github.com/Hamlib/Hamlib/releases/download/4.3/hamlib-4.3.tar.gz -P $HOME/Downloads
-tar -zxvf $HOME/Downloads/hamlib-4.3.tar.gz -C $SIGBOX_SOURCE
-cd $SIGBOX_SOURCE/hamlib-4.3
-./configure --prefix=/usr/local --enable-static
-make
-sudo make install
-sudo ldconfig
-
-##
-##  INSTALL DRIVERS
-##
 TERM=ansi whiptail --title "SIGbox Installer" --msgbox "Install Drivers" 12 120
 
 echo -e "${SIGBOX_BANNER_COLOR}"
@@ -887,6 +747,151 @@ then
 	sudo ldconfig
 fi
 
+##
+##  INSTALL LIBRARIERS
+##
+TERM=ansi whiptail --title "SIGbox Installer" --msgbox "Install Libraries" 12 120
+echo -e "${SIGBOX_BANNER_COLOR}"
+echo -e "${SIGBOX_BANNER_COLOR} #SIGBOX#"
+echo -e "${SIGBOX_BANNER_COLOR} #SIGBOX#   Install Librariers"
+echo -e "${SIGBOX_BANNER_COLOR} #SIGBOX#"
+echo -e "${SIGBOX_BANNER_RESET}"
+cd $SIGBOX_SOURCE
+
+# Hamlib
+wget https://github.com/Hamlib/Hamlib/releases/download/4.3/hamlib-4.3.tar.gz -P $HOME/Downloads
+tar -zxvf $HOME/Downloads/hamlib-4.3.tar.gz -C $SIGBOX_SOURCE
+cd $SIGBOX_SOURCE/hamlib-4.3
+./configure --prefix=/usr/local --enable-static
+make
+sudo make install
+sudo ldconfig
+
+
+
+##
+##  INSTALL DECODERS
+##
+TERM=ansi whiptail --title "SIGbox Installer" --msgbox "Install Decoders" 12 120
+echo -e "${SIGBOX_BANNER_COLOR}"
+echo -e "${SIGBOX_BANNER_COLOR} #SIGBOX#"
+echo -e "${SIGBOX_BANNER_COLOR} #SIGBOX#   Install Decoders"
+echo -e "${SIGBOX_BANNER_COLOR} #SIGBOX#"
+echo -e "${SIGBOX_BANNER_RESET}"
+cd $SIGBOX_SOURCE
+
+# APT
+# Aptdec is a FOSS program that decodes images transmitted by NOAA weather satellites.
+cd $SIGBOX_SOURCE
+sudo apt install libsndfile-dev libpng-dev
+git clone https://github.com/Xerbo/aptdec.git && cd aptdec
+mkdir build && cd build
+cmake -DCMAKE_BUILD_TYPE=Release ..
+make
+
+# CM256cc
+cd $SIGBOX_SOURCE
+git clone https://github.com/f4exb/cm256cc.git
+cd cm256cc
+mkdir build; cd build
+cmake ..
+make -j4
+sudo make install
+sudo ldconfig
+
+# LibDAB
+cd $SIGBOX_SOURCE
+git clone https://github.com/srcejon/dab-cmdline
+cd dab-cmdline/library
+mkdir build; cd build
+cmake ..
+make -j4
+sudo make install
+sudo ldconfig
+
+# MBElib 1.3.0 
+#
+# Supports the 7200x4400 bit/s codec used in P25 Phase 1, the 7100x4400 bit/s codec used
+# in ProVoice and the "Half Rate" 3600x2250 bit/s vocoder used in various radio systems
+cd $SIGBOX_SOURCE
+git clone https://github.com/szechyjs/mbelib.git
+cd mbelib
+mkdir build; cd build
+cmake ..
+make -j4
+sudo make install
+sudo ldconfig
+
+# SerialDV
+cd $SIGBOX_SOURCE
+git clone https://github.com/f4exb/serialDV.git
+cd serialDV
+mkdir build; cd build
+cmake ..	# Codec2/FreeDV
+
+# Codec2 is already installed from the packager, but this version is required for SDRangel.
+cd $SIGBOX_SDRANGEL
+git clone https://github.com/drowe67/codec2.git
+cd codec2
+git reset --hard 76a20416d715ee06f8b36a9953506876689a3bd2
+mkdir build_linux; cd build_linux
+cmake -Wno-dev -DCMAKE_INSTALL_PREFIX=/opt/install/codec2 ..
+make -j $(nproc) install
+make -j4
+sudo make install
+sudo ldconfig
+
+# DSDcc
+cd $SIGBOX_SOURCE
+git clone https://github.com/f4exb/dsdcc.git
+cd dsdcc
+mkdir build; cd build
+cmake ..
+make -j4
+sudo make install
+sudo ldconfig
+
+# SGP4
+# python-sgp4 1.4-1 is available in the packager, installing this version just to be sure.
+cd $SIGBOX_SOURCE
+git clone https://github.com/dnwrnr/sgp4.git
+cd sgp4
+mkdir build; cd build
+cmake ..
+make -j4
+sudo make install
+sudo ldconfig
+
+# LibSigMF
+cd $SIGBOX_SOURCE
+git clone https://github.com/deepsig/libsigmf.git
+cd libsigmf
+mkdir build; cd build
+cmake ..
+make -j4
+sudo make install
+sudo ldconfig
+	
+# Liquid-DSP
+cd $SIGBOX_SOURCE
+git clone https://github.com/jgaeddert/liquid-dsp.git
+cd liquid-dsp
+./bootstrap.sh
+./configure --enable-fftoverride 
+make -j4
+sudo make install
+sudo ldconfig
+
+# Bluetooth Baseband Library
+cd $SIGBOX_SOURCE
+git clone https://github.com/greatscottgadgets/libbtbb.git
+cd libbtbb
+mkdir build && cd build
+cmake ..
+make -j4
+sudo make install
+sudo ldconfig
+
 
 ##
 ## INSTALL GNURADIO
@@ -999,6 +1004,10 @@ echo -e "${SIGBOX_BANNER_RESET}"
 # Fldigi
 if grep fldigi "$SIGBOX_CONFIG"
 then
+	# Fldigi Dependencies
+	sudo apt-get install -y libfltk-images1.3 libfltk1.3 libflxmlrpc1 libgcc-s1 libhamlib2 libmbedcrypto3 libmbedtls12 libmbedx509-0 \
+	libpng16-16 libportaudio2 libpulse0 libsamplerate0 libsndfile1
+
     sudo apt-get install -y fldigi
 fi
 
@@ -1030,6 +1039,10 @@ fi
 # WSJT-X
 if grep wsjtx "$SIGBOX_CONFIG"
 then
+	# WSJT-X Dependencies
+	sudo apt-get install -y libgfortran5 libqt5widgets5 libqt5network5 libqt5printsupport5 libqt5multimedia5-plugins libqt5serialport5 \
+    libqt5sql5-sqlite libfftw3-single3 libgomp1 libboost-all-dev libusb-1.0-0
+	
 	sudo apt-get install -y wsjtx
 fi
 
@@ -1074,6 +1087,9 @@ fi
 # splat
 if grep splat "$SIGBOX_CONFIG"
 then
+	# SPLAT Dependencies
+	sudo apt-get install -y aglfn gnuplot gnuplot-data gnuplot-qt gnuplot-doc
+
     sudo apt-get install -y splat
 fi
 

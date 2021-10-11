@@ -10,12 +10,12 @@ Much how you see Amateur Radio operators build "go-kits" for remote or emergency
 
 ![alt-test](https://github.com/joecupano/SIGbox/blob/main/tools/SIGbox_architecture.png)
 
-## SIGpi
+## SIGdeb
 
 SIGdeb is the compute component of SIGbox built on Ubuntu 20.04 Desktop. The SIGdeb Build Script is run on desktop machine as user with sudo privileges.
 
-Total install time varies if you choose compile some software versus going with packages available frome the Debian Distro repo. Below is a list of software installed. Asterisk (*) indicate software packages
-that are compiled
+Total install time varies if you choose compile some software versus going with packages available frome the Debian Distro repo. Below is a list of software that is installed.
+Asterisk (*) indicate software packages that are compiled.
 
 ```
 
@@ -30,7 +30,7 @@ Device Drivers
 - soapyhackrf Soapy SDR Module for HackRF One *
 - soapyplutosdr Soapy SDR Module for PlutoSD *
 
-Libraries
+Libraries and Decoders
 - cm256cc *
 - dab-cmdline/library *
 - mbelib *
@@ -40,49 +40,31 @@ Libraries
 - libsigmf *
 - liquid-dsp *
 - libbtbb *
-- Hamlib 3.3-5
 - Hamlib 4.3 *
 
-Digital Decoders
-- 
-
 SDR Applications
-- gnuradio 3.87
-- CubicSDR
+- GNU Radio 3.8.1
 - SDRangel *
 - SDR++ *
 
 Packet Radio
-- libax25
-- ax25-apps
-- ax25-tools
+- AX.25
+- linpac
 - direwolf 1.7 *
-
+- xastir APRS Station Tracking and Reporting
 
 Amateur Radio
-- fldigi 4.1.0
-- fldigi 4.1.20 *
-- wsjt-x 2.4.0
-- wsjt-x 2.4.2 *
-- qsstv
-- qsstv 9.5.8 *
+- fldigi 4.1.06
+- wsjt-x 2.5.0
+- qsstv 9.4.4
 
+Other Useful Applicaiotns
+- GPS and NTP:
+- gpredict:   Satellite Tracking
+- wireshark:  Network Traffic Analyzer (WiFi, Bluetooth)
+- kismet:     Wireless network monitoring tool
+- SPLAT:      RF Signal Propagation, Loss, And Terrain analysis tool for 20 MHz to 20 GHz
 
-Satellite and Geo
-- gpredict Satellite Tracking
-- xastir APRS Station Tracking and Reporting
-- linpac Packet Radio Temrinal with mail client
-
-
-Tools
-- kismet Wireless snifferand monitor
-- wireshark Network Traffic Analyzer
-- audacity Audio Editor
-- pavu PulseAudio Control
-- mumble VoIP Server and Client
-- splat RF Signal Propagation, Loss, And Terrain analysis tool for 20 MHz to 20 GHz
-- gps GPS client and NTP sync
-- tempest Uses your computer monitor to send out AM radio signals *
 
 ```
 
@@ -103,31 +85,6 @@ git clone https://github.com/joecupano/SIGdeb.git
 cd SIGdeb
 ./SIGdeb_installer.sh
 ```
-## Distro versus Compiled Software versions
-
-Go with the distro releases of software packages for classic and common use cases.
-If you are a more experience signals investigator you may find your needs may require the latest versions of software which require compile and alot of patience for the time they take to compile. The software packages that can take an hour each to compile include:
-
-- Hamlib 4.3
-- Fldigi 4.1.20
-- WSJT-X 2.4.2
-- QSSTV 9.5.8
-
-SDRangel can take up to 90 minutes to compile. 
-
-## Mumble Server (VoIP)
-
-This server is only necessary if intent to remotely connect to SIGpi and require audio at that remote location. You have the option of running the server on startup or not. Run the following command. 
-
-```
-sudo dpkg-reconfigure mumble-server
-```
-
-- You will first be asked whether you want to autostart the server or not. Select **No** unless you intent on accessing the SigPI remotely all the time.
-
-- When asked to allow mumble-server to use higher priority select **No**.
-
-- When asked to create a SuperUser password do something strong.
 
 ## APRS and Packet using a VHF/UHF Transceiver
 

@@ -198,7 +198,7 @@ install_dependencies(){
 	cd $SIGBOX_SOURCE
 
     sudo apt-get install -y git cmake g++ pkg-config autoconf automake libtool build-essential pulseaudio bison flex gettext ffmpeg
-	sudo apt-get install -y portaudio19-dev doxygen graphviz gnuplot gnuplot-x11 swig  icu-doc libjs-jquery-ui-docs tcl8.6 tk8.6 libvolk2-doc python-cycler-doc inkscape
+	sudo apt-get install -y portaudio19-dev doxygen graphviz gnuplot gnuplot-x11 swig  icu-doc libjs-jquery-ui-docs tcl8.6 tk8.6 libvolk2-doc python-cycler-doc
 	sudo apt-get install -y tk8.6-blt2.5 ttf-bitstream-vera uhd-host dvipng texlive-latex-extra ttf-staypuft tix openssl
 	
 	sudo apt-get install -y libusb-1.0-0 libusb-1.0-0-dev libusb-dev libudev1
@@ -216,7 +216,7 @@ install_dependencies(){
 	
 	sudo apt-get install -y libcanberra-gtk-module libcanberra-gtk0 libcppunit-1.15-0 libcppunit-dev  
 	sudo apt-get install -y libfreesrp0 libglfw3 libgmp-dev libgmpxx4ldbl libhidapi-libusb0 libicu-dev libjs-jquery-ui 
-	sudo apt-get install -y liblimesuite20.01-1 liblog4cpp5-dev liblog4cpp5v5 libmirisdr0 libtk8.6 libfaad libfaad-dev
+	sudo apt-get install -y liblog4cpp5-dev liblog4cpp5v5 libfaad libfaad-dev
 
 	sudo apt-get install -y python3-pip python3-numpy python3-mako python3-sphinx python3-lxml python3-yaml python3-click python3-click-plugins 
 	sudo apt-get install -y python3-zmq python3-scipy python3-scapy python3-setuptools python3-pyqt5 python3-gi-cairo python-docutils python-gobject python3-nose
@@ -224,12 +224,6 @@ install_dependencies(){
 	sudo apt-get install -y python3-tornado texlive-extra-utils python-networkx-doc python3-gdal python3-pygraphviz python3-pydot libgle3 python-pyqtgraph-doc 
 	sudo apt-get install -y python-matplotlib-doc python3-cairocffi python3-tk-dbg python-matplotlib-data python3-cycler python3-kiwisolver python3-matplotlib python3-networkx 
 	sudo apt-get install -y python3-opengl python3-pyqt5.qtopengl python3-pyqtgraph python3-tk python-pyside python-qt4 python3-qwt-qt5
-
-	sudo apt-get install -y qtchooser libqt5multimedia5-plugins qtmultimedia5-dev libqt5websockets5-dev qttools5-dev qttools5-dev-tools 
-	sudo apt-get install -y libqt5opengl5-dev qtbase5-dev libqt5quick5 libqt5charts5-dev qml-module-qtlocation  qml-module-qtpositioning qml-module-qtquick-window2
-	
-	sudo apt-get install -y qml-module-qtquick-dialogs qml-module-qtquick-controls qml-module-qtquick-controls2 qml-module-qtquick-layouts libqt5serialport5-dev 
-	sudo apt-get install -y qtdeclarative5-dev qtpositioning5-dev qtlocation5-dev libqt5texttospeech5-dev libqwt-qt5-dev
 
 	sudo python3 -m pip install --upgrade pip
 	sudo pip3 install pygccxml
@@ -272,8 +266,7 @@ install_dependencies(){
 	sudo apt-get install -y libgfortran5 libqt5widgets5 libqt5network5 libqt5printsupport5 libqt5multimedia5-plugins libqt5serialport5 \
     libqt5sql5-sqlite libfftw3-single3 libgomp1 libboost-all-dev libusb-1.0-0
 
-	# QSSTV
-	sudo apt-get install -y 
+	# QSSTV - None
 
 	# SPLAT
 	sudo apt-get install -y aglfn gnuplot gnuplot-data gnuplot-qt gnuplot-doc

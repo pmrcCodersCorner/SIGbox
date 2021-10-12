@@ -53,7 +53,7 @@ DESKTOP_ICONS=/usr/share/icons
 DESKTOP_XDG_MENU=/usr/share/extra-xdg-menus
 
 # SIGbox Install Support files
-SIGBOX_CONFIG=$SIGBOX_HOME/SIGBOX_installer_config.txt
+SIGBOX_CONFIG=$SIGBOX_HOME/SIGbox_config
 SIGBOX_INSTALL_TXT1=$SIGBOX_HOME/updates/SIGbox-installer-1.txt
 SIGBOX_BANNER_COLOR="\e[0;104m\e[K"   # blue
 SIGBOX_BANNER_RESET="\e[0m"
@@ -158,7 +158,6 @@ select_usefulapps() {
 		"splat" "RF Signal Propagation, Loss, And Terrain analysis tool for 20 MHz to 20 GHz " OFF \
         "wireshark" "Network Traffic Analyzer useful for WiFi and Bluetooth. " OFF \
         "kismet" "Wireless sniffer and monitor " OFF \
-        
         3>&1 1>&2 2>&3)
     RET=$?
     echo $FUN >> $SIGBOX_CONFIG
@@ -194,7 +193,7 @@ install_dependencies(){
 	sudo apt-get install -y libopenjp2-7 libopenjp2-7-dev libv4l-dev
 	sudo apt-get install -y libsdl1.2-dev libfaad2 libfftw3-dev libfftw3-doc libfftw3-bin libfftw3-dev libfftw3-long3 libfftw3-quad3
 
-	sudo apt-get install -y libvolk2-bin libvolk2-dev libvolk2.2 libfaad-dev zlib1g-dev libasound2-dev 
+	sudo apt-get install -y libvolk2-bin libvolk2-dev libvolk2.2 libfaad-dev zlib1g zlib1g-dev libasound2-dev 
 	sudo apt-get install -y libopencv-dev libxml2-dev libaio-dev libnova-dev libwxgtk-media3.0-dev libcairo2-dev libavcodec-dev libpthread-stubs0-dev
 	sudo apt-get install -y libavformat-dev libfltk1.3-dev libfltk1.3 libsndfile1-dev libopus-dev libavahi-common-dev libavahi-client-dev libavdevice-dev libavutil-dev
 	sudo apt-get install -y libsdl1.2-dev libgsl-dev liblog4cpp5-dev libzmq3-dev liborc-0.4 liborc-0.4-0 liborc-0.4-dev libsamplerate0-dev libgmp-dev
@@ -785,7 +784,7 @@ fi
 TERM=ansi whiptail --title "SIGbox Installer" --msgbox "Install Libraries" 12 120
 echo -e "${SIGBOX_BANNER_COLOR}"
 echo -e "${SIGBOX_BANNER_COLOR} #SIGBOX#"
-echo -e "${SIGBOX_BANNER_COLOR} #SIGBOX#   Install Librariers"
+echo -e "${SIGBOX_BANNER_COLOR} #SIGBOX#   Install Libraries"
 echo -e "${SIGBOX_BANNER_COLOR} #SIGBOX#"
 echo -e "${SIGBOX_BANNER_RESET}"
 cd $SIGBOX_SOURCE

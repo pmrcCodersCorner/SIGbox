@@ -799,7 +799,6 @@ sudo make install
 sudo ldconfig
 
 
-
 ##
 ##  INSTALL DECODERS
 ##
@@ -923,17 +922,6 @@ cmake ..
 make -j4
 sudo make install
 sudo ldconfig
-
-
-##
-## INSTALL DECODERS
-##
-TERM=ansi whiptail --title "SIGbox Installer" --msgbox "Decoders" 12 120
-echo -e "${SIGBOX_BANNER_COLOR}"
-echo -e "${SIGBOX_BANNER_COLOR} #SIGBOX#"
-echo -e "${SIGBOX_BANNER_COLOR} #SIGBOX#   Install Decoders"
-echo -e "${SIGBOX_BANNER_COLOR} #SIGBOX#"
-echo -e "${SIGBOX_BANNER_RESET}"
  
 # OP25 ---- script crashes at next line and goes to and with EOF error
 #if grep op25 "$SIGBOX_CONFIG"

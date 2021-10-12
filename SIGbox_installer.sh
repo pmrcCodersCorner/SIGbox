@@ -136,7 +136,9 @@ select_amateurradio() {
         3>&1 1>&2 2>&3)
     RET=$?
     echo $FUN >> $SIGBOX_CONFIG
+}
 
+select_packetradio() {
     FUN=$(whiptail --title "Packet Radio and APRS" --checklist --separate-output \
         "Choose Packet Radio Applications" 20 80 12 \
         "direWolf" "DireWolf 1.7 Soundcard TNC for APRS " OFF \
@@ -627,6 +629,7 @@ select_sdrdevices
 select_decoders
 select_sdrapps
 select_amateurradio
+select_packetradio
 select_usefulapps
 TERM=ansi whiptail --title "SIGbox Installer" --msgbox "Ready to Install" 12 120
 

@@ -212,7 +212,9 @@ install_dependencies(){
 	sudo apt-get install -y python3-opengl python3-pyqt5.qtopengl python3-pyqtgraph python3-tk
 
 	sudo python3 -m pip install --upgrade pip
+	sudo pip3 install pyinstaller
 	sudo pip3 install pygccxml
+	sudo pip3 install qtawesome
 	sudo pip3 install PyQt5
 	sudo pip3 install PyQt4
 	sudo pip3 install PySide
@@ -465,6 +467,12 @@ install_sdrplusplus(){
 	echo -e "${SIGBOX_BANNER_COLOR} #SIGBOX#"
 	echo -e "${SIGBOX_BANNER_RESET}"
 
+	sudo apt-get install -y libfftw3-dev libglfw3-dev libglew-dev libvolk2-dev libsoapysdr-dev libad9361-devl ibairspyhf-dev 
+
+	cd $SIGBOX_SOURCE
+	git clone https://github.com/AlexandreRouma/SDRPlusPlus
+	cd SDRPlusPlus
+	mkdir build && cd build
 	cmake ../ -DOPT_BUILD_AUDIO_SINK=OFF \
 	-DOPT_BUILD_BLADERF_SOURCE=OFF \
 	-DOPT_BUILD_M17_DECODER=ON \
@@ -473,7 +481,8 @@ install_sdrplusplus(){
 	-DOPT_BUILD_PORTAUDIO_SINK=ON \
 	-DOPT_BUILD_SOAPY_SOURCE=ON \
 	-DOPT_BUILD_AIRSPY_SOURCE=OFF
-	make -j4sudo make install
+	make -j4
+	sudo make install
 	sudo ldconfig
 
 	# SDRplusplus dependencies
@@ -1086,10 +1095,10 @@ echo -e "${SIGBOX_BANNER_RESET}"
 # Artemis
 if grep artemis "$SIGBOX_CONFIG"
 then
-    cd $SIGBOX_SOURCE
-	git clone https://github.com/AresValley/Artemis.git
-	cd $SIGBOX_SOURCE/artemis/spec_files/Linux
-	pyinstaller Artemis.spec
+    cd $HOME/Downloads
+	wget https://aresvalley.com/download/193/ 
+	mv index.html artemis.tar.gz
+	tar -zxvf artemis.tar.gz -C $SIGBOX_SOURCE
 fi
 
 # GPS

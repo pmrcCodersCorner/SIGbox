@@ -447,7 +447,7 @@ install_sdrangel_compile(){
 	-DCMAKE_INSTALL_PREFIX=/opt/install/sdrangel ..
 	make -j4 install
 	# Copy special startup script for this snowflake
-	sudo cp $SIGBOX_HOME/tools/SIGbox_sdrangel.sh /usr/local/bin
+	sudo cp $SIGBOX_HOME/tools/SIGbox_sdrangel.sh /usr/local/bin/sdrangel
 	# Copy Desktop file
 	sudo cp $SIGBOX_SOURCE/SDRangel/sdrangel/build/sdrangel.desktop $DESKTOP_FILES
 
@@ -457,7 +457,6 @@ install_sdrangel_compile(){
 	# Generate a new wisdom file for FFT sizes : 128, 256, 512, 1024, 2048, 4096, 8192, 16384 and 32768.
 	# This will take a very long time.
 	fftwf-wisdom -n -o fftw-wisdom 128 256 512 1024 2048 4096 8192 16384 32768
-
 }
 
 install_sdrplusplus(){
@@ -681,7 +680,7 @@ then
 	cd rtl-sdr
 	mkdir build	
 	cd build
-	cmake ../
+	cmake ../ -DINSTALL_UDEV_RULES=ON -DDETACH_KERNEL_DRIVER=ON
 	make
 	sudo make install
 	sudo ldconfig

@@ -575,24 +575,44 @@ install_SIGBOXmenu(){
 	# Copy Menu items into relevant directories
 	# 
 	
-	sudo cp $SIGBOX_DESKTOP/SIGbox_example.desktop $DESKTOP_FILES
+	cp $SIGBOX_DESKTOP/SIGbox*.desktop /home/$USER/Desktop
+	sudo cp $SIGBOX_DESKTOP/SIGbox.directory $DESKTOP_DIRECTORY
+	sudo cp $SIGBOX_DESKTOP/SIGbox.menu $DESKTOP_XDG_MENU
+	sudo cp $SIGBOX_DESKTOP/SIGbox*.desktop $DESKTOP_FILES
+	sudo cp $SIGBOX_ICONS/* $DESKTOP_ICONS
+	
 	sudo cp $SIGBOX_SOURCE/LimeSuite/Desktop/lime-suite.desktop $DESKTOP_FILES
 	#sudo cp $SIGBOX_SOURCE/flrig-1.4.2/data/flrig.desktop $DESKTOP_FILES
 	#sudo cp $SIGBOX_SOURCE/fldigi-4.1.20/data/flarq.desktop $DESKTOP_FILES
 	#sudo cp $SIGBOX_SOURCE/fldigi-4.1.20/data/fldigi.desktop $DESKTOP_FILES
 	#sudo cp $SIGBOX_SOURCE/qsstv/qsstv.desktop $DESKTOP_FILES
-	sudo cp $SIGBOX_DESKTOP/*.desktop $DESKTOP_FILES
-	sudo cp $SIGBOX_DESKTOP/SIGbox.directory $DESKTOP_DIRECTORY
-	sudo cp $SIGBOX_DESKTOP/SIGbox.menu $DESKTOP_XDG_MENU
-	sudo cp $SIGBOX_ICONS/* $DESKTOP_ICONS
+	#sudo cp $DESKTOP_FILES/gnuradio-grc.desktop $USER/Desktop/gnuradio-grc.desktop
 	
 	#
-	# Add SIGbox Category for each installed application
+	# Add SigPi Category for each installed application
 	#
 
-	sudo cp $SIGBOX_DESKTOP/sigidwiki.desktop /home/$USER/Desktop/sigidwiki.desktop
-	sudo cp $SIGBOX_DESKTOP/SIGBOX_home.desktop /home/$USER/Desktop/SIGbox_home.desktop
-	#sudo cp $DESKTOP_FILES/gnuradio-grc.desktop $USER/Desktop/gnuradio-grc.desktop
+	sudo sed -i "s/Categories.*/Categories=$SIGPI_MENU_CATEGORY;/" $DESKTOP_FILES/lime-suite.desktop
+	sudo sed -i "s/Categories.*/Categories=$SIGPI_MENU_CATEGORY;/" $DESKTOP_FILES/gnuradio-grc.desktop
+	#sudo sed -i "s/Categories.*/Categories=$SIGPI_MENU_CATEGORY;/" $DESKTOP_FILES/gqrx.desktop
+	sudo sed -i "s/Categories.*/Categories=$SIGPI_MENU_CATEGORY;/" $DESKTOP_FILES/sdrangel.desktop
+	sudo sed -i "s/Categories.*/Categories=$SIGPI_MENU_CATEGORY;/" $DESKTOP_FILES/SDRPlusPlus.desktop
+	sudo sed -i "s/Categories.*/Categories=$SIGPI_MENU_CATEGORY;/" $DESKTOP_FILES/direwolf.desktop
+	sudo sed -i "s/Categories.*/Categories=$SIGPI_MENU_CATEGORY;/" $DESKTOP_FILES/linpac.desktop
+	sudo sed -i "s/Categories.*/Categories=$SIGPI_MENU_CATEGORY;/" $DESKTOP_FILES/xastir.desktop
+	sudo sed -i "s/Categories.*/Categories=$SIGPI_MENU_CATEGORY;/" $DESKTOP_FILES/flarq.desktop
+	sudo sed -i "s/Categories.*/Categories=$SIGPI_MENU_CATEGORY;/" $DESKTOP_FILES/fldigi.desktop
+	sudo sed -i "s/Categories.*/Categories=$SIGPI_MENU_CATEGORY;/" $DESKTOP_FILES/flrig.desktop
+	sudo sed -i "s/Categories.*/Categories=$SIGPI_MENU_CATEGORY;/" $DESKTOP_FILES/wsjtx.desktop
+	sudo sed -i "s/Categories.*/Categories=$SIGPI_MENU_CATEGORY;/" $DESKTOP_FILES/message_aggregator.desktop
+	sudo sed -i "s/Categories.*/Categories=$SIGPI_MENU_CATEGORY;/" $DESKTOP_FILES/qsstv.desktop
+	#sudo sed -i "s/Categories.*/Categories=$SIGPI_MENU_CATEGORY;/" $DESKTOP_FILES/mumble.desktop
+	sudo sed -i "s/Categories.*/Categories=$SIGPI_MENU_CATEGORY;/" $DESKTOP_FILES/gpredict.desktop
+	sudo sed -i "s/Categories.*/Categories=$SIGPI_MENU_CATEGORY;/" $DESKTOP_FILES/wireshark.desktop
+	sudo sed -i "s/Categories.*/Categories=$SIGPI_MENU_CATEGORY;/" $DESKTOP_FILES/sigidwiki.desktop
+	sudo sed -i "s/Categories.*/Categories=$SIGPI_MENU_CATEGORY;/" $DESKTOP_FILES/SIGbox_home.desktop
+	sudo sed -i "s/Categories.*/Categories=$SIGPI_MENU_CATEGORY;/" $DESKTOP_FILES/SIGbox_reddit.desktop	
+
 }
 
 

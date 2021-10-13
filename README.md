@@ -1,6 +1,6 @@
 ﻿# SIGdeb Build Script
 
-Release: 20211007-0420
+Release: 20211013-0420
 
 ## Background
 
@@ -59,7 +59,8 @@ Amateur Radio
 - qsstv 9.4.4
 
 Other Useful Applicaiotns
-- GPS and NTP:
+- GPS and NTP Services
+- Artemis:    Local SIGint database
 - gpredict:   Satellite Tracking
 - wireshark:  Network Traffic Analyzer (WiFi, Bluetooth)
 - kismet:     Wireless network monitoring tool
@@ -118,8 +119,11 @@ ax0     N0CALL-3      1200    255     4       APRS / Packet
 
 - Save and exit
 
-### DireWolf
 
+### Artemis
+Artemis allows for various example signals to be quickly viewed with the corresponding example waterfall image, frequency, bandwidth and other information. There is also a filtering function that allows you to search by frequency and type of signal.
+
+### DireWolf
 DireWolf needs to be running for APRS and Packet applications to have use the AX0 interface defined in the previou section. You will need to configure your
 callsign, the soundcard device to use, and whether using PTT or VOX in the **$HOME/direwolf.conf** file. The conf file itslef is well documented in how to configure else consult the [DireWolf online docs](https://github.com/wb2osz/direwolf/tree/master/doc).
 
@@ -128,7 +132,7 @@ Because a number of factors go into a successful DireWold setup with your transc
 ### XASTIR
 Xastir is an application that provides geospatial mappng of APRS signals. It needs to configured to use the RF interface provided by DireWolf. You must start Direwolf in a separately terminal window before you start Xastir. Be sure to consult [Xastir online documentation](https://xastir.org/index.php/Main_Page) for more info.
 
-## Gpredict
+### Gpredict
 Some satellites have packet capability. Gpredict is a real-time satellite tracking and orbit prediction application. It needs to be configured with your location’s latitude, longitude, altitude, plus online data feeds for accurate tracking. Be sure to consult [Gpredict documentation]( http://gpredict.oz9aec.net/documents.php} for more info
 
 ## Post Installation

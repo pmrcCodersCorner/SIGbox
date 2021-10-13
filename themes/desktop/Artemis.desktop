@@ -2,7 +2,7 @@
 Name=Artemis
 Comment-SIGINT Database locally installed
 Exec=xdg-open $HOME/source/artemis/Artemis
-Icon=/usr/share/icons/artemis_icon.png
+Icon=/usr/share/pixmaps/artemis3.svg
 Terminal=false
 Type=Application
 Categories=SigBox;

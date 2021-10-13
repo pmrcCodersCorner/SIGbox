@@ -492,12 +492,13 @@ install_sdrplusplus(){
 }
 
 install_kismet(){
+	TERM=ansi whiptail --title "SIGbox Installer" --msgbox "Installing Kismet" 12 120
+
 	echo -e "${SIGBOX_BANNER_COLOR}"
 	echo -e "${SIGBOX_BANNER_COLOR} #SIGBOX#"
 	echo -e "${SIGBOX_BANNER_COLOR} #SIGBOX#   Install Kismet"
 	echo -e "${SIGBOX_BANNER_COLOR} #SIGBOX#"
 	echo -e "${SIGBOX_BANNER_RESET}"
-	TERM=ansi whiptail --infobox "Installing Kismet" 10 100
     wget -O - https://www.kismetwireless.net/repos/kismet-release.gpg.key | sudo apt-key add -
     echo 'deb https://www.kismetwireless.net/repos/apt/release/buster buster main' | sudo tee /etc/apt/sources.list.d/kismet.list
 	sudo apt update

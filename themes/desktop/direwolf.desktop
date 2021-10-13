@@ -6,4 +6,4 @@ Icon=direwolf_icon.png
 StartupNotify=true
 Terminal=false
 Type=Application
-Categories=SigPi;
+Categories=SigBox;

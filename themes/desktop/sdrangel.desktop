@@ -7,5 +7,5 @@ Icon=sdrangel_icon
 StartupNotify=true
 Terminal=true
 Type=Application
-Categories=SigPi;
+Categories=SigBox;
 X-KeepTerminal=true

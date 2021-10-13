@@ -3,13 +3,13 @@
 <Menu>
   <Name>Applications</Name>
   <Menu>
-    <Name>SigPi</Name>
-    <Directory>SigPi.directory</Directory>
+    <Name>SigBox</Name>
+    <Directory>SigBox.directory</Directory>
     <Include>
-        <Category>SigPi</Category>
+        <Category>SigBox</Category>
     </Include>
   </Menu> 
 </Menu>
 <!-- 
-    End SigPi
+    End SigBox
 -->

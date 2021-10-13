@@ -1,11 +1,11 @@
 [Desktop Entry]
 Version=1.0
-Name=SIGpi Example
-Comment=SIGpi Example
+Name=SIGbox Example
+Comment=SIGbox Example
 Exec=sigpi_example.sh
 Icon=/usr/share/icons/sigbox_icon_48x48.png
 Terminal=true
 X-MultipleArgs=false
 Type=Application
-Categories=SigPi;
+Categories=SigBox;
 StartupNotify=true

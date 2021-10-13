@@ -6,4 +6,4 @@ Exec=flarq
 Icon=flarq
 Terminal=false
 Type=Application
-Categories=Network;HamRadio;
+Categories=SigBox;

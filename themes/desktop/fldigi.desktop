@@ -6,4 +6,4 @@ Exec=fldigi
 Icon=fldigi
 Terminal=false
 Type=Application
-Categories=Network;HamRadio;
+Categories=SigBox;

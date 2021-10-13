@@ -42,7 +42,7 @@ SIGBOX_SDRPLUSPLUS=$SIGBOX_SOURCE/SDplusplus
 SIGBOX_THEMES=$SIGBOX_HOME/themes
 SIGBOX_BACKGROUNDS=$SIGBOX_THEMES/backgrounds
 SIGBOX_ICONS=$SIGBOX_THEMES/icons
-SIGBOX_LOGO=$SIGBOX_THEMES/logo
+SIGBOX_PIXMAPS=$SIGBOX_THEMES/pixmaps
 SIGBOX_DESKTOP=$SIGBOX_THEMES/desktop
 SIGBOX_MENU_CATEGORY=SIGbox
 
@@ -50,6 +50,7 @@ SIGBOX_MENU_CATEGORY=SIGbox
 DESKTOP_DIRECTORY=/usr/share/desktop-directories
 DESKTOP_FILES=/usr/share/applications
 DESKTOP_ICONS=/usr/share/icons
+DESKTOP_PIXMAPS=/usr/share/pixmaps
 DESKTOP_XDG_MENU=/usr/share/extra-xdg-menus
 
 # SIGbox Install Support files
@@ -590,6 +591,7 @@ install_SIGBOXmenu(){
 	sudo cp $SIGBOX_DESKTOP/SIGbox.menu $DESKTOP_XDG_MENU
 	sudo cp $SIGBOX_DESKTOP/SIGbox*.desktop $DESKTOP_FILES
 	sudo cp $SIGBOX_ICONS/* $DESKTOP_ICONS
+	sudo cp $SIGBOX_PIXMAPS/* $DESKTOP_PIXMAPS
 	
 	sudo cp $SIGBOX_SOURCE/LimeSuite/Desktop/lime-suite.desktop $DESKTOP_FILES
 	#sudo cp $SIGBOX_SOURCE/flrig-1.4.2/data/flrig.desktop $DESKTOP_FILES

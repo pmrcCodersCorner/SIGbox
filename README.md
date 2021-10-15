@@ -37,6 +37,7 @@ Libraries and Decoders
 - serialDV *
 - dsdcc *
 - sgp4 *
+- RadioSonde *
 - libsigmf *
 - liquid-dsp *
 - libbtbb *

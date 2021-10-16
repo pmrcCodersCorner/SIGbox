@@ -1,117 +1,90 @@
 #!/bin/bash
 
 ###
-### SIGdeb Install GR_GSM
+### SIGbox_Install_GR-GSM
 ###
 ### 
 
-###
-###
-### This script is part of the SIGbox Project.
-###
-### Applications and driver updates include
-###
-### - GR-GSM
-###
+### 20121015 - Broken - Need to address device conf;icy since osmosdr not found
 
-##
-## INIT VARIABLES AND DIRECTORIES
-##
+###
+### INIT VARIABLES AND DIRECTORIES
+###
 
 # Package Versions
+HAMLIB_VER="hamlib-4.3"
+GNURADIO_VER="gnuradio_3.8.1"
+FLDIGI_VERPKG="fldigi-4.1.06"
+WSJTX_VER="wsjtx_2.5.0"
+QSSTV_VER="qsstv_9.4.4"
 
-# Source Directory
-SIGDEB_SOURCE=$HOME/source
+# Package Source Directory
+SIGBOX_SOURCE=$HOME/source
 
-# Executable Directory (will be created as root)
-SIGDEB_OPT=/opt/SIGdeb
-SIGDEB_EXE=$SIGDEB_OPT/bin
-
-# SIGdeb Home directory
-SIGDEB_HOME=$SIGDEB_SOURCE/SIGbox
+# SIGbox Home directory
+SIGBOX_HOME=$SIGBOX_SOURCE/SIGdeb
 
 # SDRangel Source directory
-SIGDEB_SDRANGEL=$SIGDEB_SOURCE/SDRangel
+SIGBOX_SDRANGEL=$SIGBOX_SOURCE/SDRangel
 
-# Desktop directories
-SIGDEB_DESKTOP=$SIGDEB_HOME/desktop
-SIGDEB_BACKGROUNDS=$SIGDEB_DESKTOP/backgrounds
-SIGDEB_ICONS=$SIGDEB_DESKTOP/icons
-SIGDEB_LOGO=$SIGDEB_DESKTOP/logo
-SIGDEB_MENU=$SIGDEB_DESKTOP/menu
+# SDR++ Source directory
+SIGBOX_SDRPLUSPLUS=$SIGBOX_SOURCE/SDRplusplus
+
+# Desktop Files
+SIGBOX_THEMES=$SIGBOX_HOME/themes
+SIGBOX_BACKGROUNDS=$SIGBOX_THEMES/backgrounds
+SIGBOX_ICONS=$SIGBOX_THEMES/icons
+SIGBOX_PIXMAPS=$SIGBOX_THEMES/pixmaps
+SIGBOX_DESKTOP=$SIGBOX_THEMES/desktop
+SIGBOX_MENU_CATEGORY=SIGbox
 
 # Desktop Destination Directories
 DESKTOP_DIRECTORY=/usr/share/desktop-directories
 DESKTOP_FILES=/usr/share/applications
 DESKTOP_ICONS=/usr/share/icons
+DESKTOP_PIXMAPS=/usr/share/pixmaps
 DESKTOP_XDG_MENU=/usr/share/extra-xdg-menus
 
-# SIGdeb Menu category
-SIGDEB_MENU_CATEGORY=SIGdeb
+# SIGbox Install Support files
+SIGBOX_CONFIG=$SIGBOX_HOME/SIGbox_config
+SIGBOX_INSTALL_TXT1=$SIGBOX_HOME/updates/SIGbox-installer-1.txt
+SIGBOX_BANNER_COLOR="\e[0;104m\e[K"   # blue
+SIGBOX_BANNER_RESET="\e[0m"
 
-# SIGdeb SSL Cert and Key
-SIGDEB_API_SSL_KEY=$SIGDEB_HOME/SIGdeb_api.key
-SIGDEB_API_SSL_CRT=$SIGDEB_HOME/SIGdeb_api.crt
+install_gr-gsm(){
 
+    sudo apt-get install -y osmo-sdr libosmosdr-dev
+    sudo apt-get install -y libosmocore libosmocore-dev
+    sudo apt-get install -y libosmocore-utils
+    sudo dpkg -L libosmocore-utils
+    cd $SIGBOX_SOURCE
+    git clone https://git.osmocom.org/gr-gsm
+    cd gr-gsm
+    mkdir build && cd build
+    cmake ..
+    make -j4
+    sudo make install
+    sudo ldconfig
+    echo 'export PYTHONPATH=/usr/local/lib/python3/dist-packages/:$PYTHONPATH' >> ~/.bashrc
+}
 
-##
-## START
-##
+###
+###  MAIN
+###
 
-echo "### "
-echo "### "
-echo "###  SIGdeb - GR-GSM Install"
-echo "### "
-echo "### "
-echo " "
+install_gr-gsm
 
-#
-# INSTALL GR-GSM (requires GNUradio 3.8)
-#
-
-echo " "
-echo " ##"
-echo " ##"
-echo " - Install GR-GSM"
-echo " ##"
-echo " ##"
-echo " "
-sudo apt-get install -y osmo-sdr libosmosdr-dev
-sudo apt-get install -y libosmocore libosmocore-dev
-sudo apt-get install -y libosmocore-utils
-sudo dpkg -L libosmocore-utils
-cd $SIGDEB_SOURCE
-git clone https://git.osmocom.org/gr-gsm
-cd gr-gsm
-mkdir build && cd build
-cmake ..
-make -j4
-sudo make install
-sudo ldconfig
-echo 'export PYTHONPATH=/usr/local/lib/python3/dist-packages/:$PYTHONPATH' >> ~/.bashrc
+echo -e "${SIGBOX_BANNER_COLOR}"
+echo -e "${SIGBOX_BANNER_COLOR} #SIGBOX#"
+echo -e "${SIGBOX_BANNER_COLOR} #SIGBOX#   Install GR-GSM"
+echo -e "${SIGBOX_BANNER_COLOR} #SIGBOX#"
+echo -e "${SIGBOX_BANNER_RESET}"
 
 #
-# Copy Menuitems into relevant directories
+# Copy Menu items into relevant directories
 # 
-
-#sudo cp $SIGDEB_MENU/sigdeb_example.desktop $DESKTOP_FILES
-sudo cp $SIGDEB_MENU/SIGdeb.directory $DESKTOP_DIRECTORY
-sudo cp $SIGDEB_MENU/SIGdeb.menu $DESKTOP_XDG_MENU
-sudo cp $SIGDEB_ICONS/* $DESKTOP_ICONS
-sudo cp /usr/local/share/Lime/Desktop/lime-suite.desktop $DESKTOP_FILES
-sudo cp $SIGDEB_MENU/*.desktop $DESKTOP_FILES
-sudo ln -s $DESKTOP_XDG_MENU/SIGdeb.menu /etc/xdg/menus/applications-merged/SIGdeb.menu
-
-#
-# Add SIGdeb Category for each installed application
-#
-
-sudo sed -i "s/Categories.*/Categories=$SIGDEB_MENU_CATEGORY;/" /usr/local/share/gnuradio-grc.desktop
-
-echo "*** "
-echo "*** "
-echo "***   UPDATEE COMPLETE"
-echo "*** "
-echo "*** "
-echo " "
-exit 0
+	
+cp $SIGBOX_DESKTOP/SIGbox*.desktop /home/$USER/Desktop
+sudo cp $SIGBOX_DESKTOP/sdrangel.desktop $DESKTOP_DIRECTORY
+sudo cp /opt/install/sdrangel/share/icons/hicolor/scalable/apps/sdrangel_icon.svg $DESKTOP_ICONS
+sudo cp /opt/install/sdrangel/share/icons/hicolor/scalable/apps/sdrangel_icon.svg $DESKTOP_PIXMAPS

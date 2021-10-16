@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ###
-### SIGdeb_installer
+### SIGbox_installer
 ###
 
 ###
@@ -30,7 +30,7 @@ QSSTV_VER="qsstv_9.4.4"
 SIGBOX_SOURCE=$HOME/source
 
 # SIGbox Home directory
-SIGBOX_HOME=$SIGBOX_SOURCE/SIGdeb
+SIGBOX_HOME=$SIGBOX_SOURCE/SIGbox
 
 # SDRangel Source directory
 SIGBOX_SDRANGEL=$SIGBOX_SOURCE/SDRangel

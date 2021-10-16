@@ -1,6 +1,6 @@
-﻿# SIGdeb Build Script
+﻿# SIGbox Build Script
 
-Release: 20211013-0420
+Release: 20211015-2300
 
 ## Background
 
@@ -10,9 +10,9 @@ Much how you see Amateur Radio operators build "go-kits" for remote or emergency
 
 ![alt-test](https://github.com/joecupano/SIGbox/blob/main/tools/SIGbox_architecture.png)
 
-## SIGdeb
+## SIGbox
 
-SIGdeb is the compute component of SIGbox built on Ubuntu 20.04 Desktop. The SIGdeb Build Script is run on desktop machine as user with sudo privileges.
+SIGbox is the compute component of SIGbox built on Ubuntu 20.04 Desktop. The SIGbox Build Script is run on desktop machine as user with sudo privileges.
 
 Total install time varies if you choose compile some software versus going with packages available frome the Debian Distro repo. Below is a list of software that is installed.
 Asterisk (*) indicate software packages that are compiled.
@@ -76,16 +76,16 @@ Other Useful Applicaiotns
 - Install tools you will need to build and compile applications
 - Create a directory in your home called source and switch into it
 - Clone the Repo
-- Change directory into SIGdeb
-- Run SIGdeb_installer.sh
+- Change directory into SIGbox
+- Run SIGbox_installer.sh
 - Follow script instructions.
 
 ```
 sudo apt-get install -y build-essential git
 mkdir ~/source && cd ~/source
-git clone https://github.com/joecupano/SIGdeb.git
-cd SIGdeb
-./SIGdeb_installer.sh
+git clone https://github.com/joecupano/SIGbox.git
+cd SIGbox
+./SIGbox_installer.sh
 ```
 
 ## APRS and Packet using a VHF/UHF Transceiver
